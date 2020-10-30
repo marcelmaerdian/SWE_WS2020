@@ -1,0 +1,68 @@
+### Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
+###
+### This program is free software: you can redistribute it and/or modify
+### it under the terms of the GNU General Public License as published by
+### the Free Software Foundation, either version 3 of the License, or
+### (at your option) any later version.
+###
+### This program is distributed in the hope that it will be useful,
+### but WITHOUT ANY WARRANTY; without even the implied warranty of
+### MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+### GNU General Public License for more details.
+###
+### You should have received a copy of the GNU General Public License
+### along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+###
+### N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
+###
+
+@host = localhost:3000/api/buecher
+#@host = gener-iert-12345.herokuapp.com/api/buecher
+
+### Suche alle Buecher
+https://{{host}}
+
+### Suche mit vorhandener Buch-ID
+https://{{host}}/00000000-0000-0000-0000-000000000001
+
+### Suche mit vorhandener Buch-ID und Versionsnummer
+https://{{host}}/00000000-0000-0000-0000-000000000001
+If-None-Match: "0"
+
+### Suche mit vorhandener Buch-ID und falscher Versionsnummer
+https://{{host}}/00000000-0000-0000-0000-000000000001
+If-None-Match: 0
+
+### Suche mit ungueltiger Buch-ID
+https://{{host}}/YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
+
+### Suche mit nicht-vorhandener Buch-ID
+https://{{host}}/99999999-9999-9999-9999-999999999999
+
+### Suche mit vorhandenem Titel
+https://{{host}}?titel=a
+
+### Suche mit vorhandener ISBN
+https://{{host}}?isbn=978-3897225831
+
+### Suche mit vorhandenen Schlagwoertern
+https://{{host}}?javascript=true&typescript=true
+
+### Suche mit vorhandenem Schlagwort "JAVASCRIPT"
+https://{{host}}?javascript=true
+
+### Suche mit vorhandenem Schlagwort "TYPESCRIPT"
+https://{{host}}?typescript=true
+
+### Suche mit gueltiger Buchart
+https://{{host}}?art=KINDLE
+
+### Suche mit gueltigem Rating
+https://{{host}}?rating=1
+
+### Suche lieferbare Buecher
+https://{{host}}?lieferbar=true
+
+### Optionen zu Buch-ID
+OPTIONS https://{{host}}/00000000-0000-0000-0000-000000000001
