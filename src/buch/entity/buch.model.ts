@@ -38,7 +38,7 @@ set('debug', true);
 // http://vincit.github.io/objection.js
 
 // https://mongoosejs.com/docs/schematypes.html
-export const buchSchema = new Schema(
+export const filmSchema = new Schema(
     {
         // MongoDB erstellt implizit einen Index fuer _id
         // mongoose-id-assigner hat geringe Download-Zahlen und
@@ -79,16 +79,16 @@ export const buchSchema = new Schema(
 );
 
 // Optimistische Synchronisation durch das Feld __v fuer die Versionsnummer
-buchSchema.plugin(optimistic);
+filmSchema.plugin(optimistic);
 
 // Methoden zum Schema hinzufuegen, damit sie spaeter beim Model (s.u.)
-// verfuegbar sind, was aber bei buch.check() zu eines TS-Syntaxfehler fuehrt:
+// verfuegbar sind, was aber bei film.check() zu eines TS-Syntaxfehler fuehrt:
 // schema.methods.check = () => {...}
 // schema.statics.findByTitel =
 //     (titel: string, cb: Function) =>
 //         return this.find({titel: titel}, cb)
 
 // Ein Model ist ein uebersetztes Schema und stellt die CRUD-Operationen fuer
-// die Dokumente bereit, d.h. das Pattern "Active Record" wird realisiert.
+// die Dokumente bereit, d.h. das Pattern  "Active Record" wird realisiert.
 // Name des Models = Name der Collection
-export const BuchModel = model('Buch', buchSchema); // eslint-disable-line @typescript-eslint/naming-convention
+export const FilmModel = model('Film', filmSchema); // eslint-disable-line @typescript-eslint/naming-convention
