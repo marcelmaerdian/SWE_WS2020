@@ -15,7 +15,6 @@
 
 ## Download- und ggf. Upload-Geschwindigkeit
 
-<<<<<<< HEAD
 In einem Webbrowser kann man z.B. mit der URL `https://speed.cloudflare.com` die
 Download- und die Upload-Geschwindigkeit testen.
 
@@ -694,11 +693,3 @@ dann kann man `JSON5.stringify()` statt `JSON.stringify()` verwenden:
     ...
     JSON5.stringify(obj);
 ```
-=======
-Test bestätigt.
-
-Test Duy
-
-
-Hallo I bims spasd
->>>>>>> 4e41e2b4ceb1dce917ae3cc83a424d5b52f58b27
