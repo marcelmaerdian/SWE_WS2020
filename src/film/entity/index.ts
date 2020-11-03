@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2020 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export * from './buch-file.service';
-export * from './buch.service';
-export * from './errors';
-export * from './mock';
+export { Buch, BuchArt, BuchData, Verlag } from './film';
+export { buchSchema, BuchModel } from './buch.model';
+export { ValidationErrorMsg, validateBuch } from './validateFilm';

@@ -16,10 +16,13 @@
  */
 
 import type { Request, Response } from 'express';
+import { BuchService } from '../service/film.service';
+import { logger } from './../../shared/logger';
 
-export const index = (_: Request, res: Response) => {
-    res.render('index', { title: 'Beispiel' });
+const buchService = new BuchService();
+
+export const suche = async (req: Request, res: Response) => {
+    logger.error(`suche(): ${req.url}`);
+    const buecher = await buchService.find();
+    res.render('suche', { title: 'Suche', buecher });
 };
-
-export * from './neues-buch';
-export * from './suche';

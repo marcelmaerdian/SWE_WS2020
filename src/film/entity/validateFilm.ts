@@ -16,7 +16,7 @@
  */
 
 import { MAX_RATING, logger } from '../../shared';
-import type { Buch } from './buch';
+import type { Buch } from './film';
 import JSON5 from 'json5';
 import validator from 'validator';
 

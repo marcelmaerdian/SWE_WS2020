@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { buch, buecher } from './buch';
+import { buch, buecher } from './film';
 import type { Buch } from '../../entity';
 import JSON5 from 'json5';
 import { logger } from '../../../shared';

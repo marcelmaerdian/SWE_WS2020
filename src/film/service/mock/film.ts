@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Verlag } from './../../entity';
-import type { BuchData } from './../../entity';
+import { BuchArt, Verlag } from '../../entity';
+import type { BuchData } from '../../entity';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 

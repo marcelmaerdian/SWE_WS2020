@@ -16,8 +16,8 @@
  */
 
 import type { Request, Response } from 'express';
-import { BuchFileRequestHandler } from './buch-file.request-handler';
-import { BuchRequestHandler } from './buch.request-handler';
+import { BuchFileRequestHandler } from './film-file.request-handler';
+import { BuchRequestHandler } from './film.request-handler';
 
 const handler = new BuchRequestHandler();
 const fileHandler = new BuchFileRequestHandler();
