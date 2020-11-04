@@ -2,11 +2,11 @@
   "titel": "?!",
   "rating": 2,
   "art": "UNSICHTBAR",
-  "verlag": "NO_VERLAG",
+  "produktion": "NO_PRODUKTION",
   "preis": 0,
   "rabatt": 0,
   "lieferbar": true,
   "datum": "12345-123-123",
-  "isbn": "falsche-isbn",
+  "prodnr": "falsche-prodnr",
   "homepage": "anyHomepage"
 }

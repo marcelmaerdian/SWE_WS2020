@@ -34,7 +34,7 @@ X-REQUEST-TYPE: GraphQL
   }
 }
 
-### Suche titel, art, isbn und version von einem Buch mit vorhandener Buch-ID
+### Suche titel, art, prodnr und version von einem Buch mit vorhandener Buch-ID
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -43,7 +43,7 @@ X-REQUEST-TYPE: GraphQL
   buch(id: "00000000-0000-0000-0000-000000000001") {
     titel
     art
-    isbn
+    prodnr
     version
   }
 }

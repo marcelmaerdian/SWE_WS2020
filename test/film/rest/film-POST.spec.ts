@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Verlag } from '../../../src/buch/entity';
+import { BuchArt, Produktion } from '../../../src/buch/entity';
 import { HttpMethod, agent, createTestserver } from '../../testserver';
 import { HttpStatus, serverConfig, uuidRegexp } from '../../../src/shared';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
@@ -43,42 +43,42 @@ const { expect } = chai;
 const neuesBuch: Buch = {
     titel: 'Neu',
     rating: 1,
-    art: BuchArt.DRUCKAUSGABE,
-    verlag: Verlag.FOO_VERLAG,
+    art: BuchArt.2DIMENSIONAL,
+    produktion: Produktion.FOO_PRODUKTION,
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
     datum: '2016-02-28',
-    isbn: '0-0070-0644-6',
+    prodnr: '0-0070-0644-6',
     homepage: 'https://test.de/',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
 };
 const neuesBuchInvalid: object = {
     titel: 'Blabla',
     rating: -1,
     art: 'UNSICHTBAR',
-    verlag: 'NO_VERLAG',
+    produktion: 'NO_PRODUKTION',
     preis: 0,
     rabatt: 0,
     lieferbar: true,
     datum: '12345-123-123',
-    isbn: 'falsche-ISBN',
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    prodnr: 'falsche-PRODNR',
+    regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: [],
 };
 const neuesBuchTitelExistiert: Buch = {
     titel: 'Alpha',
     rating: 1,
-    art: BuchArt.DRUCKAUSGABE,
-    verlag: Verlag.FOO_VERLAG,
+    art: BuchArt.2DIMENSIONAL,
+    produktion: Produktion.FOO_PRODUKTION,
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
     datum: '2016-02-28',
-    isbn: '0-0070-9732-8',
+    prodnr: '0-0070-9732-8',
     homepage: 'https://test.de/',
-    autoren: [{ nachname: 'Test', vorname: 'Theo' }],
+    regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 
@@ -164,17 +164,17 @@ describe('POST /buecher', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, verlag, datum, isbn } = await response.json();
+        const { art, rating, produktion, datum, prodnr } = await response.json();
 
         expect(art).to.be.equal(
-            'Die Art eines Buches muss KINDLE oder DRUCKAUSGABE sein.',
+            'Die Art eines Buches muss 3DIMENSIONAL oder 2DIMENSIONAL sein.',
         );
         expect(rating).to.endWith('eine gueltige Bewertung.');
-        expect(verlag).to.be.equal(
-            'Der Verlag eines Buches muss FOO_VERLAG oder BAR_VERLAG sein.',
+        expect(produktion).to.be.equal(
+            'Der Produktion eines Buches muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
-        expect(isbn).to.endWith('eine gueltige ISBN-Nummer.');
+        expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
     });
 
     test('Neues Buch, aber der Titel existiert bereits', async () => {

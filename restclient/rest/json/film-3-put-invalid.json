@@ -2,13 +2,13 @@
   "_id": "00000000-0000-0000-0000-000000000003",
   "titel": "?!",
   "rating": 5,
-  "art": "KINDLE",
-  "verlag": "IWI_VERLAG",
+  "art": "3DIMENSIONAL",
+  "produktion": "IWI_PRODUKTION",
   "preis": 9999,
   "rabatt": 99,
   "lieferbar": true,
   "datum": "12345-123-123",
-  "isbn": "falsche-isbn",
+  "prodnr": "falsche-prodnr",
   "homepage": "anyHomepage",
   "schlagwoerter": ["JAVASCRIPT"]
 }

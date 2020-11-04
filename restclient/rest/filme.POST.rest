@@ -55,12 +55,12 @@ Authorization: Bearer {{login.response.body.$.token}}
 
 < .\json\buch-neu.titel-exists.json
 
-### Neues Buch anlegen, aber die ISBN-Nummer existiert bereits
+### Neues Buch anlegen, aber die PRODNR-Nummer existiert bereits
 POST https://{{host}}/buecher
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.isbn-exists.json
+< .\json\buch-neu.prodnr-exists.json
 
 ### Neues Buch ohne Login anlegen
 POST https://{{host}}/buecher

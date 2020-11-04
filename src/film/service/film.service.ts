@@ -21,7 +21,7 @@ import {
     BuchInvalid,
     BuchNotExists,
     BuchServiceError,
-    IsbnExists,
+    ProdnrExists,
     TitelExists,
     VersionInvalid,
     VersionOutdated,
@@ -246,9 +246,9 @@ export class BuchService {
             return resultTitel;
         }
 
-        const resultIsbn = await this.checkIsbnExists(buch);
-        if (resultIsbn !== undefined) {
-            return resultIsbn;
+        const resultProdnr = await this.checkProdnrExists(buch);
+        if (resultProdnr !== undefined) {
+            return resultProdnr;
         }
 
         logger.debug('BuchService.validateCreate(): ok');
@@ -274,21 +274,21 @@ export class BuchService {
         return undefined;
     }
 
-    private async checkIsbnExists(buch: Buch) {
-        const { isbn } = buch;
+    private async checkProdnrExists(buch: Buch) {
+        const { prodnr } = buch;
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const tmpId = await BuchModel.findOne({ isbn }, { _id: true }).lean<
+        const tmpId = await BuchModel.findOne({ prodnr }, { _id: true }).lean<
             string
         >();
 
         if (tmpId !== null) {
             logger.debug(
-                `BuchService.checkIsbnExists(): buch=${JSON5.stringify(tmpId)}`,
+                `BuchService.checkProdnrExists(): buch=${JSON5.stringify(tmpId)}`,
             );
-            return new IsbnExists(isbn as string, tmpId);
+            return new ProdnrExists(prodnr as string, tmpId);
         }
 
-        logger.debug('BuchService.checkIsbnExists(): ok');
+        logger.debug('BuchService.checkProdnrExists(): ok');
         return undefined;
     }
 

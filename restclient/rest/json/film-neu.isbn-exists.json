@@ -1,16 +1,16 @@
 {
   "titel": "Test",
   "rating": 1,
-  "art": "KINDLE",
-  "verlag": "FOO_VERLAG",
+  "art": "3DIMENSIONAL",
+  "produktion": "FOO_PRODUKTION",
   "preis": 99.9,
   "rabatt": 1,
   "lieferbar": true,
   "datum": "2020-02-01T00:00:00.000Z",
-  "isbn": "978-3897225831",
+  "prodnr": "978-3897225831",
   "homepage": "https://test.de/",
   "schlagwoerter": ["JAVASCRIPT", "TYPESCRIPT"],
-  "autoren": [
+  "regisseure": [
     {
       "vorname": "Theo",
       "nachname": "Test"

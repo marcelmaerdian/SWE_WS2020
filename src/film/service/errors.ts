@@ -33,13 +33,13 @@ export class TitelExists extends BuchServiceError {
     }
 }
 
-export class IsbnExists extends BuchServiceError {
-    constructor(readonly isbn: string, readonly id: string) {
+export class ProdnrExists extends BuchServiceError {
+    constructor(readonly prodnr: string, readonly id: string) {
         super();
     }
 }
 
-export type CreateError = BuchInvalid | TitelExists | IsbnExists;
+export type CreateError = BuchInvalid | TitelExists | ProdnrExists;
 
 export class VersionInvalid extends BuchServiceError {
     constructor(readonly version: string | undefined) {

@@ -37,16 +37,16 @@ package buch.entity {
   BuchModel ..> validateBuch
 
   BuchData ..> BuchArt
-  BuchData ..> Verlag
+  BuchData ..> Produktion
 
   enum BuchArt {
-    KINDLE
-    DRUCKAUSGABE
+    3DIMENSIONAL
+    2DIMENSIONAL
   }
 
-  enum Verlag {
-    FOO_VERLAG
-    BAR_VERLAG
+  enum Produktion {
+    FOO_PRODUKTION
+    BAR_PRODUKTION
   }
 
   interface BuchData <<entity>> {
@@ -57,15 +57,15 @@ package buch.entity {
     + titel: string
     + rating?: number
     + art?: BuchArt
-    + verlag: Verlag
+    + produktion: Produktion
     + preis: number
     + rabatt?: number
     + lieferbar?: boolean
     + datum?: Date
-    + isbn: string
+    + prodnr: string
     + homepage?: string
     + schlagwoerter?: Array<string>
-    + autoren: any
+    + regisseure: any
   }
 }
 

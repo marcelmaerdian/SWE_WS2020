@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Verlag } from '../../entity';
+import { BuchArt, Produktion } from '../../entity';
 import type { BuchData } from '../../entity';
 
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -24,16 +24,16 @@ export const buch: BuchData = {
     _id: '00000000-0000-0000-0000-000000000001',
     titel: 'Alpha',
     rating: 4,
-    art: BuchArt.DRUCKAUSGABE,
-    verlag: Verlag.FOO_VERLAG,
+    art: BuchArt.2DIMENSIONAL,
+    produktion: Produktion.FOO_PRODUKTION,
     preis: 11.1,
     rabatt: 0.011,
     lieferbar: true,
     datum: new Date('2018-02-01T00:00:00.000Z'),
-    isbn: '000-0-00000-000-1',
+    prodnr: '000-0-00000-000-1',
     homepage: 'https://acme.at/',
     schlagwoerter: ['JAVASCRIPT'],
-    autoren: [
+    regisseure: [
         {
             nachname: 'Alpha',
             vorname: 'Adriana',
@@ -54,16 +54,16 @@ export const buecher: BuchData[] = [
         _id: '00000000-0000-0000-0000-000000000002',
         titel: 'Beta',
         rating: 2,
-        art: BuchArt.KINDLE,
-        verlag: Verlag.FOO_VERLAG,
+        art: BuchArt.3DIMENSIONAL,
+        produktion: Produktion.FOO_PRODUKTION,
         preis: 22.2,
         rabatt: 0.022,
         lieferbar: true,
         datum: new Date('2018-02-02T00:00:00.000Z'),
-        isbn: '000-0-00000-000-2',
+        prodnr: '000-0-00000-000-2',
         homepage: 'https://acme.biz/',
         schlagwoerter: ['TYPESCRIPT'],
-        autoren: [
+        regisseure: [
             {
                 nachname: 'Beta',
                 vorname: 'Brunhilde',

@@ -20,23 +20,23 @@ import type { Buch } from './film';
 import JSON5 from 'json5';
 import validator from 'validator';
 
-const { isISBN, isISO8601, isURL } = validator;
+const { isPRODNR, isISO8601, isURL } = validator;
 
 export interface ValidationErrorMsg {
     id?: string;
     titel?: string;
     art?: string;
     rating?: string;
-    verlag?: string;
+    produktion?: string;
     datum?: string;
-    isbn?: string;
+    prodnr?: string;
     homepage?: string;
 }
 
 /* eslint-disable max-lines-per-function, no-null/no-null */
 export const validateBuch = (buch: Buch) => {
     const err: ValidationErrorMsg = {};
-    const { titel, art, rating, verlag, datum, isbn, homepage } = buch;
+    const { titel, art, rating, produktion, datum, prodnr, homepage } = buch;
 
     if (titel === undefined || titel === null || titel === '') {
         err.titel = 'Ein Buch muss einen Titel haben.';
@@ -48,10 +48,10 @@ export const validateBuch = (buch: Buch) => {
     if (art === undefined || art === null || art === '') {
         err.art = 'Die Art eines Buches muss gesetzt sein';
     } else if (
-        (art as unknown) !== 'KINDLE' &&
-        (art as unknown) !== 'DRUCKAUSGABE'
+        (art as unknown) !== '3DIMENSIONAL' &&
+        (art as unknown) !== '2DIMENSIONAL'
     ) {
-        err.art = 'Die Art eines Buches muss KINDLE oder DRUCKAUSGABE sein.';
+        err.art = 'Die Art eines Buches muss 3DIMENSIONAL oder 2DIMENSIONAL sein.';
     }
 
     if (
@@ -62,14 +62,14 @@ export const validateBuch = (buch: Buch) => {
         err.rating = `${rating} ist keine gueltige Bewertung.`;
     }
 
-    if (verlag === undefined || verlag === null || verlag === '') {
-        err.verlag = 'Der Verlag des Buches muss gesetzt sein.';
+    if (produktion === undefined || produktion === null || produktion === '') {
+        err.produktion = 'Der Produktion des Buches muss gesetzt sein.';
     } else if (
-        (verlag as unknown) !== 'FOO_VERLAG' &&
-        (verlag as unknown) !== 'BAR_VERLAG'
+        (produktion as unknown) !== 'FOO_PRODUKTION' &&
+        (produktion as unknown) !== 'BAR_PRODUKTION'
     ) {
-        err.verlag =
-            'Der Verlag eines Buches muss FOO_VERLAG oder BAR_VERLAG sein.';
+        err.produktion =
+            'Der Produktion eines Buches muss FOO_PRODUKTION oder BAR_PRODUKTION sein.';
     }
 
     if (typeof datum === 'string' && !isISO8601(datum)) {
@@ -77,11 +77,11 @@ export const validateBuch = (buch: Buch) => {
     }
 
     if (
-        isbn !== undefined &&
-        isbn !== null &&
-        (typeof isbn !== 'string' || !isISBN(isbn))
+        prodnr !== undefined &&
+        prodnr !== null &&
+        (typeof prodnr !== 'string' || !isPRODNR(prodnr))
     ) {
-        err.isbn = `'${isbn}' ist keine gueltige ISBN-Nummer.`;
+        err.prodnr = `'${prodnr}' ist keine gueltige PRODNR-Nummer.`;
     }
 
     // Falls "preis" ein string ist: Pruefung z.B. 12.30

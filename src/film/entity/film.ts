@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export enum Verlag {
-    FOO_VERLAG = 'FOO_VERLAG',
-    BAR_VERLAG = 'BAR_VERLAG',
+export enum Produktion {
+    FOO_PRODUKTION = 'FOO_PRODUKTION',
+    BAR_PRODUKTION = 'BAR_PRODUKTION',
 }
 
 export enum BuchArt {
-    KINDLE = 'KINDLE',
-    DRUCKAUSGABE = 'DRUCKAUSGABE',
+    3DIMENSIONAL = '3DIMENSIONAL',
+    2DIMENSIONAL = '2DIMENSIONAL',
 }
 
 // gemeinsames Basis-Interface fuer REST und GraphQL
@@ -32,15 +32,15 @@ export interface Buch {
     titel: string | undefined | null;
     rating: number | undefined | null;
     art: BuchArt | '' | undefined | null;
-    verlag: Verlag | '' | undefined | null;
+    produktion: Produktion | '' | undefined | null;
     preis: number;
     rabatt: number | undefined;
     lieferbar: boolean;
     datum: string | Date | undefined;
-    isbn: string | undefined | null;
+    prodnr: string | undefined | null;
     homepage: string | undefined | null;
     schlagwoerter?: string[];
-    autoren: unknown;
+    regisseure: unknown;
 }
 
 export interface BuchData extends Buch {

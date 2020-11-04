@@ -71,7 +71,7 @@ const limiter = rateLimit(rateLimitOptions);
 const apiPath = '/api';
 export const PATHS = {
     buecher: `${apiPath}/buecher`,
-    verlage: `${apiPath}/verlage`,
+    produktionen: `${apiPath}/produktionen`,
     login: `${apiPath}/login`,
     graphql: '/graphql',
     html: '/html',
@@ -145,7 +145,7 @@ class App {
         // vgl: Spring WebFlux.fn
         // https://expressjs.com/en/api.html#router
         // Beispiele fuer "Middleware" bei Express:
-        //  * Authentifizierung und Autorisierung
+        //  * Authentifizierung und Regisseurisierung
         //  * Rumpf bei POST- und PUT-Requests einlesen
         //  * Logging, z.B. von Requests
         //  * Aufruf der naechsten Middleware-Funktion
@@ -193,7 +193,7 @@ class App {
     private verlagRoutes() {
         const router = Router(); // eslint-disable-line new-cap
         router.get('/', notYetImplemented);
-        this.app.use(PATHS.verlage, router);
+        this.app.use(PATHS.produktionen, router);
     }
 
     private loginRoutes() {

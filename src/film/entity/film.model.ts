@@ -46,11 +46,11 @@ export const filmSchema = new Schema(
         _id: { type: String, default: uuid }, // eslint-disable-line @typescript-eslint/naming-convention
         titel: { type: String, required: true, unique: true },
         rating: { type: Number, min: 0, max: 5 },
-        art: { type: String, enum: ['DRUCKAUSGABE', 'KINDLE'] },
-        verlag: {
+        art: { type: String, enum: ['2DIMENSIONAL', '3DIMENSIONAL'] },
+        produktion: {
             type: String,
             required: true,
-            enum: ['FOO_VERLAG', 'BAR_VERLAG'],
+            enum: ['FOO_PRODUKTION', 'BAR_PRODUKTION'],
             // es gibt auch
             //  lowercase: true
             //  uppercase: true
@@ -59,11 +59,11 @@ export const filmSchema = new Schema(
         rabatt: Number,
         lieferbar: Boolean,
         datum: Date,
-        isbn: { type: String, required: true, unique: true, immutable: true },
+        prodnr: { type: String, required: true, unique: true, immutable: true },
         homepage: String,
         schlagwoerter: { type: [String], sparse: true },
         // "anything goes"
-        autoren: [Schema.Types.Mixed],
+        regisseure: [Schema.Types.Mixed],
     },
     {
         // default: virtueller getter "id"

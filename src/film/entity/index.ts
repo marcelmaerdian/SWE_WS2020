@@ -15,6 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export { Buch, BuchArt, BuchData, Verlag } from './film';
+export { Buch, BuchArt, BuchData, Produktion } from './film';
 export { buchSchema, BuchModel } from './buch.model';
 export { ValidationErrorMsg, validateBuch } from './validateFilm';

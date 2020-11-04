@@ -20,5 +20,5 @@
 @host = localhost:3000/api
 #@host = gener-iert-12345.herokuapp.com/api
 
-### Suche alle Verlage
-https://{{host}}/verlage
+### Suche alle Produktionen
+https://{{host}}/produktionen

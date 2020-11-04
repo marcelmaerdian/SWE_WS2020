@@ -40,14 +40,14 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
     "Enum-Typ fuer die Art eines Buches"
     enum Art {
-        DRUCKAUSGABE
-        KINDLE
+        2DIMENSIONAL
+        3DIMENSIONAL
     }
 
-    "Enum-Typ fuer den Verlag eines Buches"
-    enum Verlag {
-        FOO_VERLAG
-        BAR_VERLAG
+    "Enum-Typ fuer den Produktion eines Buches"
+    enum Produktion {
+        FOO_PRODUKTION
+        BAR_PRODUKTION
     }
 
     "Datenschema eines Buches, das empfangen oder gesendet wird"
@@ -57,12 +57,12 @@ export const typeDefs = gql`
         titel: String!
         rating: Int
         art: Art
-        verlag: Verlag!
+        produktion: Produktion!
         preis: Float
         rabatt: Float
         lieferbar: Boolean
         datum: String
-        isbn: String
+        prodnr: String
         homepage: String
         schlagwoerter: [String]
     }
@@ -79,12 +79,12 @@ export const typeDefs = gql`
             titel: String!
             rating: Int
             art: String
-            verlag: String!
+            produktion: String!
             preis: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
-            isbn: String
+            prodnr: String
             homepage: String
             schlagwoerter: [String]
         ): Buch
@@ -93,12 +93,12 @@ export const typeDefs = gql`
             titel: String!
             rating: Int
             art: String
-            verlag: String!
+            produktion: String!
             preis: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
-            isbn: String
+            prodnr: String
             homepage: String
             schlagwoerter: [String]
             version: Int
