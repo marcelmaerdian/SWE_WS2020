@@ -1,1 +1,9 @@
 Hier werden all unsere Dokumentationsschritte veröffentlicht.
+
+buch    ->  film
+verlag  ->  produktion
+autoren ->  regisseure
+autor   ->  regisseur
+druckausgabe -> zweidimensional
+kindle  ->  dreidimensional
+isbn    ->  prodnr
