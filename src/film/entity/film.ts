@@ -20,9 +20,9 @@ export enum Produktion {
     BAR_PRODUKTION = 'BAR_PRODUKTION',
 }
 
-export enum BuchArt {
-    3DIMENSIONAL = '3DIMENSIONAL',
-    2DIMENSIONAL = '2DIMENSIONAL',
+export enum FilmArt {
+    DREIDIMENSIONAL = '3DIMENSIONAL',
+    ZWEIDIMENSIONAL = '2DIMENSIONAL',
 }
 
 // gemeinsames Basis-Interface fuer REST und GraphQL
