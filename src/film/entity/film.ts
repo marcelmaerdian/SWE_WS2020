@@ -21,17 +21,17 @@ export enum Produktion {
 }
 
 export enum FilmArt {
-    DREIDIMENSIONAL = '3DIMENSIONAL',
-    ZWEIDIMENSIONAL = '2DIMENSIONAL',
+    DREIDIMENSIONAL = 'DREIDIMENSIONAL',
+    ZWEIDIMENSIONAL = 'ZWEIDIMENSIONAL',
 }
 
 // gemeinsames Basis-Interface fuer REST und GraphQL
-export interface Buch {
+export interface Film {
     _id?: string; // eslint-disable-line @typescript-eslint/naming-convention
     __v?: number; // eslint-disable-line @typescript-eslint/naming-convention
     titel: string | undefined | null;
     rating: number | undefined | null;
-    art: BuchArt | '' | undefined | null;
+    art: FilmArt | '' | undefined | null;
     produktion: Produktion | '' | undefined | null;
     preis: number;
     rabatt: number | undefined;
@@ -43,7 +43,7 @@ export interface Buch {
     regisseure: unknown;
 }
 
-export interface BuchData extends Buch {
+export interface FilmData extends Film {
     createdAt?: number;
     updatedAt?: number;
 
@@ -56,5 +56,3 @@ export interface BuchData extends Buch {
         remove?: { href: string };
     };
 }
-
-// Testkommentar

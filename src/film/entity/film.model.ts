@@ -46,7 +46,7 @@ export const filmSchema = new Schema(
         _id: { type: String, default: uuid }, // eslint-disable-line @typescript-eslint/naming-convention
         titel: { type: String, required: true, unique: true },
         rating: { type: Number, min: 0, max: 5 },
-        art: { type: String, enum: ['2DIMENSIONAL', '3DIMENSIONAL'] },
+        art: { type: String, enum: ['ZWEIDIMENSIONAL', 'DREIDIMENSIONAL'] },
         produktion: {
             type: String,
             required: true,

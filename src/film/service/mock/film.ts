@@ -20,11 +20,11 @@ import type { BuchData } from '../../entity';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 
-export const buch: BuchData = {
+export const film: BuchData = {
     _id: '00000000-0000-0000-0000-000000000001',
     titel: 'Alpha',
     rating: 4,
-    art: BuchArt.2DIMENSIONAL,
+    art: BuchArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 11.1,
     rabatt: 0.011,
@@ -48,13 +48,13 @@ export const buch: BuchData = {
     updatedAt: 0,
 };
 
-export const buecher: BuchData[] = [
-    buch,
+export const filme: BuchData[] = [
+    film,
     {
         _id: '00000000-0000-0000-0000-000000000002',
         titel: 'Beta',
         rating: 2,
-        art: BuchArt.3DIMENSIONAL,
+        art: BuchArt.DREIDIMENSIONAL,
         produktion: Produktion.FOO_PRODUKTION,
         preis: 22.2,
         rabatt: 0.022,

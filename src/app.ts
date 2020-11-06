@@ -35,13 +35,13 @@ import {
     findById,
     update,
     upload,
-} from './buch/rest';
-import { index, neuesBuch, suche } from './buch/html';
+} from './film/rest';
+import { index, neuesBuch, suche } from './film/html';
 import { isAdmin, isAdminMitarbeiter, login, validateJwt } from './auth';
 // Einlesen von application/json im Request-Rumpf
 // Fuer multimediale Daten (Videos, Bilder, Audios): raw-body
 import { json, urlencoded } from 'body-parser';
-import { resolvers, typeDefs } from './buch/graphql';
+import { resolvers, typeDefs } from './film/graphql';
 import { ApolloServer } from 'apollo-server-express';
 import type { ApolloServerExpressConfig } from 'apollo-server-express';
 import type { Options } from 'express-rate-limit';
@@ -70,7 +70,7 @@ const limiter = rateLimit(rateLimitOptions);
 
 const apiPath = '/api';
 export const PATHS = {
-    buecher: `${apiPath}/buecher`,
+    filme: `${apiPath}/filme`,
     produktionen: `${apiPath}/produktionen`,
     login: `${apiPath}/login`,
     graphql: '/graphql',
@@ -187,7 +187,7 @@ class App {
             .put(`/:${idParam}/file`, validateJwt, isAdminMitarbeiter, upload)
             .get(`/:${idParam}/file`, download);
 
-        this.app.use(PATHS.buecher, router);
+        this.app.use(PATHS.filme, router);
     }
 
     private verlagRoutes() {
@@ -226,7 +226,7 @@ class App {
         const router = Router(); // eslint-disable-line new-cap
         router.route('/').get(index);
         router.route('/suche').get(suche);
-        router.route('/neues-buch').get(neuesBuch);
+        router.route('/neues-film').get(neuesBuch);
         this.app.use(PATHS.html, router);
 
         // Alternativen zu Pug: EJS, Handlebars, ...

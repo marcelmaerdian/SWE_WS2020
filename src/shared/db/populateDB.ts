@@ -18,7 +18,7 @@
 import type { Collection, Db, MongoClient } from 'mongodb';
 import { dbConfig, serverConfig } from './../config';
 import { GridFSBucket } from 'mongodb';
-import { buecher } from './filme';
+import { filme } from './filme';
 import { connectMongoDB } from './mongoDB';
 import { createReadStream } from 'fs';
 import { logger } from '../logger';
@@ -27,7 +27,7 @@ import { saveReadable } from './gridfs';
 
 const createCollection = async (db: Db) => {
     // http://mongodb.github.io/node-mongodb-native/3.5/api/Db.html#dropCollection
-    const collectionName = 'Buch';
+    const collectionName = 'Film';
     logger.warn(`Die Collection "${collectionName}" wird geloescht...`);
     let dropped = false;
     try {
@@ -51,7 +51,7 @@ const createCollection = async (db: Db) => {
     );
 
     // http://mongodb.github.io/node-mongodb-native/3.5/api/Collection.html#insertMany
-    const result = await collection.insertMany(buecher);
+    const result = await collection.insertMany(filme);
     logger.warn(`${result.insertedCount} Datensaetze wurden eingefuegt.`);
 
     return collection;

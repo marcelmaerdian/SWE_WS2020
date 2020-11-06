@@ -25,7 +25,7 @@ package shared {
   hide sendMail circle
 }
 
-package buch {
+package film {
   package entity {
     class BuchModel
     hide BuchModel circle
@@ -46,8 +46,8 @@ package buch {
     class BuchService << control >> {
       + async findById(id: string): Promise<BuchData | undefined>
       + async find(query?: any): Promise<Array<BuchData>>
-      + async create(buch: BuchData): Promise<BuchData>
-      + async update(buch: BuchData, version: string): Promise<BuchData>
+      + async create(film: BuchData): Promise<BuchData>
+      + async update(film: BuchData, version: string): Promise<BuchData>
       + async delete(id: string): Promise<boolean>
     }
   }

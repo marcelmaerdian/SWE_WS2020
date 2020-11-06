@@ -23,7 +23,7 @@
  *      String:
  *      Boolean: true, false
  *      ID: eindeutiger Bezeichner, wird serialisiert wie ein String
- *  Buch: eigene Typdefinition für Queries
+ *  Film: eigene Typdefinition für Queries
  *        "!" markiert Pflichtfelder
  *  Query: Signatur der Lese-Methoden
  *  Mutation: Signatur der Schreib-Methoden
@@ -40,8 +40,8 @@ import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
     "Enum-Typ fuer die Art eines Buches"
     enum Art {
-        2DIMENSIONAL
-        3DIMENSIONAL
+        ZWEIDIMENSIONAL
+        DREIDIMENSIONAL
     }
 
     "Enum-Typ fuer den Produktion eines Buches"
@@ -51,7 +51,7 @@ export const typeDefs = gql`
     }
 
     "Datenschema eines Buches, das empfangen oder gesendet wird"
-    type Buch {
+    type Film {
         id: ID!
         version: Int
         titel: String!
@@ -67,13 +67,13 @@ export const typeDefs = gql`
         schlagwoerter: [String]
     }
 
-    "Funktionen, um Buecher zu empfangen"
+    "Funktionen, um Filme zu empfangen"
     type Query {
-        buecher(titel: String): [Buch]
-        buch(id: ID!): Buch
+        filme(titel: String): [Film]
+        film(id: ID!): Film
     }
 
-    "Funktionen, um Buecher anzulegen, zu aktualisieren oder zu loeschen"
+    "Funktionen, um Filme anzulegen, zu aktualisieren oder zu loeschen"
     type Mutation {
         createBuch(
             titel: String!
@@ -87,7 +87,7 @@ export const typeDefs = gql`
             prodnr: String
             homepage: String
             schlagwoerter: [String]
-        ): Buch
+        ): Film
         updateBuch(
             _id: ID
             titel: String!
@@ -102,7 +102,7 @@ export const typeDefs = gql`
             homepage: String
             schlagwoerter: [String]
             version: Int
-        ): Buch
+        ): Film
         deleteBuch(id: ID!): Boolean
     }
 `;

@@ -18,5 +18,5 @@
 import type { Request, Response } from 'express';
 
 export const neuesBuch = (_: Request, res: Response) => {
-    res.render('neues-buch', { title: 'Neues Buch' });
+    res.render('neues-film', { title: 'Neues Film' });
 };

@@ -25,7 +25,7 @@ package mongoose {
   hide model circle
 }
 
-package buch.entity {
+package film.entity {
   class "validateBuch()" as validateBuch
   hide validateBuch circle
 
@@ -40,8 +40,8 @@ package buch.entity {
   BuchData ..> Produktion
 
   enum BuchArt {
-    3DIMENSIONAL
-    2DIMENSIONAL
+    DREIDIMENSIONAL
+    ZWEIDIMENSIONAL
   }
 
   enum Produktion {

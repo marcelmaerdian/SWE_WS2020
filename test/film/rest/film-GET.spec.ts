@@ -19,7 +19,7 @@ import { HttpStatus, serverConfig } from '../../../src/shared';
 import { agent, createTestserver } from '../../testserver';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import type { AddressInfo } from 'net';
-import type { BuchData } from '../../../src/buch/entity';
+import type { BuchData } from '../../../src/film/entity';
 import { PATHS } from '../../../src/app';
 import type { Server } from 'http';
 import chai from 'chai';
@@ -48,11 +48,11 @@ const schlagwoerterNichtVorhanden = ['csharp', 'php'];
 // T e s t s
 // -----------------------------------------------------------------------------
 let server: Server;
-const path = PATHS.buecher;
+const path = PATHS.filme;
 let buecherUri: string;
 
 // Test-Suite
-describe('GET /buecher', () => {
+describe('GET /filme', () => {
     beforeAll(async () => {
         server = await createTestserver();
 
@@ -62,7 +62,7 @@ describe('GET /buecher', () => {
 
     afterAll(() => { server.close() });
 
-    test('Alle Buecher', async () => {
+    test('Alle Filme', async () => {
         // given
 
         // when
@@ -74,16 +74,16 @@ describe('GET /buecher', () => {
         expect(headers.get('Content-Type')).to.match(/json/iu);
         // https://jestjs.io/docs/en/expect
         // JSON-Array mit mind. 1 JSON-Objekt
-        const buecher: Array<any> = await response.json();
-        expect(buecher).not.to.be.empty;
-        buecher.forEach((buch) => {
-            const selfLink = buch._links.self.href;
+        const filme: Array<any> = await response.json();
+        expect(filme).not.to.be.empty;
+        filme.forEach((film) => {
+            const selfLink = film._links.self.href;
             expect(selfLink).to.have.string(path);
         });
     });
 
     each(titelVorhanden).test(
-        'Buecher mit einem Titel, der "%s" enthaelt',
+        'Filme mit einem Titel, der "%s" enthaelt',
         async (teilTitel) => {
             // given
             const uri = `${buecherUri}?titel=${teilTitel}`;
@@ -99,15 +99,15 @@ describe('GET /buecher', () => {
             const body = await response.json();
             expect(body).not.to.be.empty;
 
-            // Jedes Buch hat einen Titel mit dem Teilstring 'a'
-            body.map((buch: BuchData) => buch.titel).forEach((titel: string) =>
+            // Jedes Film hat einen Titel mit dem Teilstring 'a'
+            body.map((film: BuchData) => film.titel).forEach((titel: string) =>
                 expect(titel.toLowerCase()).to.have.string(teilTitel),
             );
         },
     );
 
     each(titelNichtVorhanden).test(
-        'Keine Buecher mit einem Titel, der "%s" nicht enthaelt',
+        'Keine Filme mit einem Titel, der "%s" nicht enthaelt',
         async (teilTitel) => {
             // given
             const uri = `${buecherUri}?titel=${teilTitel}`;
@@ -123,7 +123,7 @@ describe('GET /buecher', () => {
     );
 
     each(schlagwoerterVorhanden).test(
-        'Mind. 1 Buch mit dem Schlagwort "%s"',
+        'Mind. 1 Film mit dem Schlagwort "%s"',
         async (schlagwort) => {
             // given
             const uri = `${buecherUri}?${schlagwort}=true`;
@@ -139,9 +139,9 @@ describe('GET /buecher', () => {
             const body = await response.json();
             expect(body).not.to.be.empty;
 
-            // Jedes Buch hat im Array der Schlagwoerter "javascript"
+            // Jedes Film hat im Array der Schlagwoerter "javascript"
             body.map(
-                (buch: BuchData) => buch.schlagwoerter,
+                (film: BuchData) => film.schlagwoerter,
             ).forEach((s: Array<string>) =>
                 expect(s).to.include(schlagwort.toUpperCase()),
             );
@@ -149,7 +149,7 @@ describe('GET /buecher', () => {
     );
 
     each(schlagwoerterNichtVorhanden).test(
-        'Keine Buecher mit dem Schlagwort "%s"',
+        'Keine Filme mit dem Schlagwort "%s"',
         async (schlagwort) => {
             // given
             const uri = `${buecherUri}?${schlagwort}=true`;

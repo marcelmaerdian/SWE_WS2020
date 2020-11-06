@@ -70,11 +70,11 @@ const idVorhandenETag = [
 // T e s t s
 // -----------------------------------------------------------------------------
 let server: Server;
-const path = PATHS.buecher;
+const path = PATHS.filme;
 let buecherUri: string;
 
 // Test-Suite
-describe('GET /buecher/:id', () => {
+describe('GET /filme/:id', () => {
     // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         server = await createTestserver();
@@ -85,7 +85,7 @@ describe('GET /buecher/:id', () => {
 
     afterAll(() => { server.close() });
 
-    each(idVorhanden).test('Buch zu vorhandener ID %s', async (id) => {
+    each(idVorhanden).test('Film zu vorhandener ID %s', async (id) => {
         // given
         const uri = `${buecherUri}/${id}`;
 
@@ -102,7 +102,7 @@ describe('GET /buecher/:id', () => {
     });
 
     each(idNichtVorhanden).test(
-        'Kein Buch zu nicht-vorhandener ID %s',
+        'Kein Film zu nicht-vorhandener ID %s',
         async (id) => {
             // given
             const uri = `${buecherUri}/${id}`;
@@ -118,7 +118,7 @@ describe('GET /buecher/:id', () => {
     );
 
     each(idVorhandenETag).test(
-        'Buch zu vorhandener ID %s mit ETag %s',
+        'Film zu vorhandener ID %s mit ETag %s',
         async (id, etag) => {
             // given
             const uri = `${buecherUri}/${id}`;

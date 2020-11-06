@@ -22,7 +22,7 @@ import {
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import type { Buch } from './../entity';
+import type { Film } from './../entity';
 import { BuchService } from '../service';
 // import type { IResolvers } from 'graphql-tools';
 import { logger } from '../../shared';
@@ -36,25 +36,25 @@ const buchService = new BuchService();
 
 // Resultat mit id (statt _id) und version (statt __v)
 // __ ist bei GraphQL fuer interne Zwecke reserviert
-const withIdAndVersion = (buch: Buch) => {
-    const result: any = buch;
-    result.id = buch._id;
-    result.version = buch.__v;
-    return buch;
+const withIdAndVersion = (film: Film) => {
+    const result: any = film;
+    result.id = film._id;
+    result.version = film.__v;
+    return film;
 };
 
 const findBuchById = async (id: string) => {
-    const buch = await buchService.findById(id);
-    if (buch === undefined) {
+    const film = await buchService.findById(id);
+    if (film === undefined) {
         return;
     }
-    return withIdAndVersion(buch);
+    return withIdAndVersion(film);
 };
 
 const findBuecher = async (titel: string | undefined) => {
     const suchkriterium = titel === undefined ? {} : { titel };
-    const buecher = await buchService.find(suchkriterium);
-    return buecher.map((buch) => withIdAndVersion(buch));
+    const filme = await buchService.find(suchkriterium);
+    return filme.map((film) => withIdAndVersion(film));
 };
 
 interface TitelCriteria {
@@ -65,16 +65,16 @@ interface IdCriteria {
     id: string;
 }
 
-const createBuch = async (buch: Buch) => {
-    buch.datum = new Date(buch.datum as string);
-    const result = await buchService.create(buch);
+const createBuch = async (film: Film) => {
+    film.datum = new Date(film.datum as string);
+    const result = await buchService.create(film);
     console.log(`resolvers createBuch(): result=${JSON.stringify(result)}`);
     return result;
 };
 
 const logUpdateResult = (
     result:
-        | Buch
+        | Film
         | BuchInvalid
         | TitelExists
         | BuchNotExists
@@ -105,7 +105,7 @@ const logUpdateResult = (
         );
     } else {
         logger.debug(
-            `resolvers updateBuch(): buch aktualisiert = ${JSON.stringify(
+            `resolvers updateBuch(): film aktualisiert = ${JSON.stringify(
                 result,
             )}`,
         );
@@ -115,13 +115,13 @@ const logUpdateResult = (
     }
 };
 
-const updateBuch = async (buch: Buch) => {
+const updateBuch = async (film: Film) => {
     logger.debug(
-        `resolvers updateBuch(): zu aktualisieren = ${JSON.stringify(buch)}`,
+        `resolvers updateBuch(): zu aktualisieren = ${JSON.stringify(film)}`,
     );
-    const version = buch.__v ?? 0;
-    buch.datum = new Date(buch.datum as string);
-    const result = await buchService.update(buch, version.toString());
+    const version = film.__v ?? 0;
+    film.datum = new Date(film.datum as string);
+    const result = await buchService.update(film, version.toString());
     logUpdateResult(result);
     return result;
 };
@@ -134,15 +134,15 @@ const deleteBuch = async (id: string) => {
 
 // Queries passend zu "type Query" in typeDefs.ts
 const query = {
-    // Buecher suchen, ggf. mit Titel als Suchkriterium
-    buecher: (_: unknown, { titel }: TitelCriteria) => findBuecher(titel),
-    // Ein Buch mit einer bestimmten ID suchen
-    buch: (_: unknown, { id }: IdCriteria) => findBuchById(id),
+    // Filme suchen, ggf. mit Titel als Suchkriterium
+    filme: (_: unknown, { titel }: TitelCriteria) => findBuecher(titel),
+    // Ein Film mit einer bestimmten ID suchen
+    film: (_: unknown, { id }: IdCriteria) => findBuchById(id),
 };
 
 const mutation = {
-    createBuch: (_: unknown, buch: Buch) => createBuch(buch),
-    updateBuch: (_: unknown, buch: Buch) => updateBuch(buch),
+    createBuch: (_: unknown, film: Film) => createBuch(film),
+    updateBuch: (_: unknown, film: Film) => updateBuch(film),
     deleteBuch: (_: unknown, { id }: IdCriteria) => deleteBuch(id),
 };
 

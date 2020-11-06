@@ -50,7 +50,7 @@ cloud {
 }
 
 database "acme (MongoDB)" {
-    [Collection Buch]
+    [Collection Film]
     [GridFS]
 }
 
@@ -72,7 +72,7 @@ RESTClient ~~> [Router]
 [BuchModel] ~~> [Mongoose]
 [BuchFileService] ~~> [MongDB\nNative Driver]
 [sendMail] ~~> [nodemailer]
-[Mongoose] ~~> [Collection Buch]
+[Mongoose] ~~> [Collection Film]
 [MongDB\nNative Driver] ~~> [GridFS]
 
 [BuchService] --> [sendMail]

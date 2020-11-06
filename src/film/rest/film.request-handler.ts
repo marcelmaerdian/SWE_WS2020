@@ -56,10 +56,10 @@ export class BuchRequestHandler {
         const { id } = req.params;
         logger.debug(`BuchRequestHandler.findById(): id=${id}`);
 
-        let buch: BuchData | undefined;
+        let film: BuchData | undefined;
         try {
             // vgl. Kotlin: Aufruf einer suspend-Function
-            buch = await this.service.findById(id);
+            film = await this.service.findById(id);
         } catch (err: unknown) {
             // Exception einer export async function bei der Ausfuehrung fangen:
             // https://strongloop.com/strongblog/comparing-node-js-promises-trycatch-zone-js-angular
@@ -70,16 +70,16 @@ export class BuchRequestHandler {
             return;
         }
 
-        if (buch === undefined) {
+        if (film === undefined) {
             logger.debug('BuchRequestHandler.findById(): status=NOT_FOUND');
             res.sendStatus(HttpStatus.NOT_FOUND);
             return;
         }
 
         logger.debug(
-            `BuchRequestHandler.findById(): buch=${JSON5.stringify(buch)}`,
+            `BuchRequestHandler.findById(): film=${JSON5.stringify(film)}`,
         );
-        const versionDb = buch.__v;
+        const versionDb = film.__v;
         if (versionHeader === `"${versionDb}"`) {
             res.sendStatus(HttpStatus.NOT_MODIFIED);
             return;
@@ -90,7 +90,7 @@ export class BuchRequestHandler {
         const baseUri = getBaseUri(req);
         // HATEOAS: Atom Links
         // eslint-disable-next-line no-underscore-dangle
-        buch._links = {
+        film._links = {
             self: { href: `${baseUri}/${id}` },
             list: { href: `${baseUri}` },
             add: { href: `${baseUri}` },
@@ -98,24 +98,24 @@ export class BuchRequestHandler {
             remove: { href: `${baseUri}/${id}` },
         };
 
-        delete buch._id;
-        delete buch.__v;
-        delete buch.createdAt;
-        delete buch.updatedAt;
-        res.json(buch);
+        delete film._id;
+        delete film.__v;
+        delete film.createdAt;
+        delete film.updatedAt;
+        res.json(film);
     }
 
     async find(req: Request, res: Response) {
-        // z.B. https://.../buecher?titel=Alpha
+        // z.B. https://.../filme?titel=Alpha
         // => req.query = { titel: "Alpha' }
         const { query } = req;
         logger.debug(
             `BuchRequestHandler.find(): queryParams=${JSON5.stringify(query)}`,
         );
 
-        let buecher: BuchData[];
+        let filme: BuchData[];
         try {
-            buecher = await this.service.find(query);
+            filme = await this.service.find(query);
         } catch (err: unknown) {
             logger.error(
                 `BuchRequestHandler.find(): error=${JSON5.stringify(err)}`,
@@ -125,9 +125,9 @@ export class BuchRequestHandler {
         }
 
         logger.debug(
-            `BuchRequestHandler.find(): buecher=${JSON5.stringify(buecher)}`,
+            `BuchRequestHandler.find(): filme=${JSON5.stringify(filme)}`,
         );
-        if (buecher.length === 0) {
+        if (filme.length === 0) {
             // Alternative: https://www.npmjs.com/package/http-errors
             // Damit wird aber auch der Stacktrace zum Client
             // uebertragen, weil das resultierende Fehlerobjekt
@@ -139,23 +139,23 @@ export class BuchRequestHandler {
 
         const baseUri = getBaseUri(req);
 
-        // asynchrone for-of Schleife statt synchrones buecher.map()
-        for await (const buch of buecher) {
-            // HATEOAS: Atom Links je Buch
+        // asynchrone for-of Schleife statt synchrones filme.map()
+        for await (const film of filme) {
+            // HATEOAS: Atom Links je Film
             // eslint-disable-next-line no-underscore-dangle
-            buch._links = { self: { href: `${baseUri}/${buch._id}` } };
+            film._links = { self: { href: `${baseUri}/${film._id}` } };
         }
 
         logger.debug(
-            `BuchRequestHandler.find(): buecher=${JSON5.stringify(buecher)}`,
+            `BuchRequestHandler.find(): filme=${JSON5.stringify(filme)}`,
         );
-        buecher.forEach((buch) => {
-            delete buch._id;
-            delete buch.__v;
-            delete buch.createdAt;
-            delete buch.updatedAt;
+        filme.forEach((film) => {
+            delete film._id;
+            delete film.__v;
+            delete film.createdAt;
+            delete film.updatedAt;
         });
-        res.json(buecher);
+        res.json(filme);
     }
 
     async create(req: Request, res: Response) {
@@ -204,7 +204,7 @@ export class BuchRequestHandler {
         const buchData = req.body; // eslint-disable-line @typescript-eslint/no-unsafe-assignment
         buchData._id = id;
         logger.debug(
-            `BuchRequestHandler.update(): buch=${JSON5.stringify(buchData)}`,
+            `BuchRequestHandler.update(): film=${JSON5.stringify(buchData)}`,
         );
 
         const result = await this.service.update(buchData, version);
@@ -326,7 +326,7 @@ export class BuchRequestHandler {
 
         if (err instanceof BuchNotExists) {
             const { id } = err;
-            const msg = `Es gibt kein Buch mit der ID "${id}".`;
+            const msg = `Es gibt kein Film mit der ID "${id}".`;
             logger.debug(`BuchRequestHandler.handleUpdateError(): msg=${msg}`);
             res.status(HttpStatus.PRECONDITION_FAILED)
                 .set('Content-Type', 'text/plain')

@@ -22,8 +22,8 @@ import { resolve } from 'path';
 const argv = minimist(process.argv.slice(0));
 const values = argv._;
 
-const image = 'juergenzimmermann/buch:1.0.0';
-const containername = 'buch';
+const image = 'juergenzimmermann/film:1.0.0';
+const containername = 'film';
 
 const startContainer = () => {
     const logfile = resolve(process.cwd(), 'server.log');
@@ -40,7 +40,7 @@ const startContainer = () => {
             '--env MAIL_LOG=false ' +
             '--env USER_PASSWORD_ENCODED=$2b$10$YTg4.iW.FPRqHExVLRf05Ob/z/BQqjUxJgncct2TgxGBjl4cCUNGS ' +
             '--env TZ=Europe/Berlin ' +
-            `--name ${containername} --hostname buch --rm ` +
+            `--name ${containername} --hostname film --rm ` +
             image,
     );
 };

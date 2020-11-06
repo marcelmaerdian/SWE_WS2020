@@ -38,7 +38,7 @@ class App <<boudary>> {
 App ..> Express
 App ..> express
 
-package buch {
+package film {
   package entity {
     interface BuchData <<entity>> {
     }

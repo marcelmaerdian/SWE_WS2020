@@ -129,8 +129,8 @@ _Mutations_ hat.
 
 Die URL für GraphQL lautet im vorliegenden Beispiel
 `https://localhost:3000/graphql`. Beispielhafte _Queries_ und _Mutations_ für
-GraphQL gibt es in den Dateien `restclient\graphql\buecher.query.http` und
-`restclient\graphql\buecher.mutation.http`.
+GraphQL gibt es in den Dateien `restclient\graphql\filme.query.http` und
+`restclient\graphql\filme.mutation.http`.
 
 #### Schema Introspection
 
@@ -304,7 +304,7 @@ ist.
 ### Docker-Image bauen
 
 Durch Aufruf des Skripts `npm run docker build` wird mit Hilfe der Datei
-`Dockerfile` das Docker-Image `juergenzimmermann/buch:1.0.0` gebaut.
+`Dockerfile` das Docker-Image `juergenzimmermann/film:1.0.0` gebaut.
 
 ### Docker-Container starten
 
@@ -404,12 +404,12 @@ Rechts oben kann man sich über den Menüpunkt _Sign Out_ ausloggen.
 
 Um nicht die DB `test` (s.o. in der URL) im künftigen Appserver zu benutzen,
 erstellt man in einer Powershell mit der Mongo CLI eine eigene DB (z.B. `acme`)
-mit einer leeren Collection (z.B. `Buch`):
+mit einer leeren Collection (z.B. `Film`):
 
 ```TXT
 mongo "mongodb+srv://<<MEINE_KENNUNG>>:<<MEIN_PASSWORT_>>@cluster0-....mongodb.net/test?w=majority"
   use acme
-  db.createCollection('Buch')
+  db.createCollection('Film')
   exit
 ```
 
@@ -589,7 +589,7 @@ https://devcenter.heroku.com/articles/free-dyno-hours.
 Nach dem Deployment ist die eigene Anwendung verfügbar und kann benutzt
 werden. Beispielsweise kann man in einer eigenen Powershell das Kommando
 `npm run curl:heroku` aufrufen. Dabei wird mit `curl` auf die URL
-`https://gener-iert-12345.herokuapp.com/buecher/00000000-0000-0000-0000-000000000001`
+`https://gener-iert-12345.herokuapp.com/filme/00000000-0000-0000-0000-000000000001`
 zugegriffen.
 
 Alternativ kann man auch `npm run open:heroku` oder `npm run open:heroku:file`
@@ -656,7 +656,7 @@ oder https://www.sitepoint.com/debug-node-app-tips-tricks-tools.
 In Anlehnung an die
 [Guidelines von TypeScript](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines)
 
-- "Feature Filenames", z.B. buch.service.ts
+- "Feature Filenames", z.B. film.service.ts
 - Klassennamen und Enums mit PascalCase,
 - Attribute und Funktionen mit camelCase,
 - private Properties _nicht_ mit vorangestelltem **\_**,

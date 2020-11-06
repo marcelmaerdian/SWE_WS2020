@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Produktion } from '../../../src/buch/entity';
+import { BuchArt, Produktion } from '../../../src/film/entity';
 import { HttpMethod, agent, createTestserver } from '../../testserver';
 import { HttpStatus, logger, serverConfig } from '../../../src/shared';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
@@ -43,7 +43,7 @@ const geaendertesBuch: object = {
     // prodnr wird nicht geaendet
     titel: 'Geaendert',
     rating: 1,
-    art: BuchArt.2DIMENSIONAL,
+    art: BuchArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 33.33,
     rabatt: 0.033,
@@ -58,7 +58,7 @@ const idVorhanden = '00000000-0000-0000-0000-000000000003';
 const geaendertesBuchIdNichtVorhanden: object = {
     titel: 'Nichtvorhanden',
     rating: 1,
-    art: BuchArt.2DIMENSIONAL,
+    art: BuchArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 33.33,
     rabatt: 0.033,
@@ -87,7 +87,7 @@ const veraltesBuch: object = {
     // prodnr wird nicht geaendet
     titel: 'Veraltet',
     rating: 1,
-    art: BuchArt.2DIMENSIONAL,
+    art: BuchArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 33.33,
     rabatt: 0.033,
@@ -101,13 +101,13 @@ const veraltesBuch: object = {
 // -----------------------------------------------------------------------------
 // T e s t s
 // -----------------------------------------------------------------------------
-const path = PATHS.buecher;
+const path = PATHS.filme;
 let server: Server;
 let buecherUri: string;
 let loginUri: string;
 
 // Test-Suite
-describe('PUT /buecher/:id', () => {
+describe('PUT /filme/:id', () => {
     // Testserver starten und dabei mit der DB verbinden
     beforeAll(async () => {
         server = await createTestserver();
@@ -121,7 +121,7 @@ describe('PUT /buecher/:id', () => {
 
     afterAll(() => { server.close() });
 
-    test('Vorhandenes Buch aendern', async () => {
+    test('Vorhandenes Film aendern', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -146,7 +146,7 @@ describe('PUT /buecher/:id', () => {
         expect(responseBody).to.be.empty;
     });
 
-    test('Nicht-vorhandenes Buch aendern', async () => {
+    test('Nicht-vorhandenes Film aendern', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -169,11 +169,11 @@ describe('PUT /buecher/:id', () => {
         expect(response.status).to.be.equal(HttpStatus.PRECONDITION_FAILED);
         const responseBody = await response.text();
         expect(responseBody).to.be.equal(
-            `Es gibt kein Buch mit der ID "${idNichtVorhanden}".`,
+            `Es gibt kein Film mit der ID "${idNichtVorhanden}".`,
         );
     });
 
-    test('Vorhandenes Buch aendern, aber mit ungueltigen Daten', async () => {
+    test('Vorhandenes Film aendern, aber mit ungueltigen Daten', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -196,7 +196,7 @@ describe('PUT /buecher/:id', () => {
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
         const { art, rating, produktion, datum, prodnr } = await response.json();
         expect(art).to.be.equal(
-            'Die Art eines Buches muss 3DIMENSIONAL oder 2DIMENSIONAL sein.',
+            'Die Art eines Buches muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
         );
         expect(rating).to.endWith('eine gueltige Bewertung.');
         expect(produktion).to.be.equal(
@@ -206,7 +206,7 @@ describe('PUT /buecher/:id', () => {
         expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
     });
 
-    test('Vorhandenes Buch aendern, aber ohne Versionsnummer', async () => {
+    test('Vorhandenes Film aendern, aber ohne Versionsnummer', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -230,7 +230,7 @@ describe('PUT /buecher/:id', () => {
         expect(responseBody).to.be.equal('Versionsnummer fehlt');
     });
 
-    test('Vorhandenes Buch aendern, aber mit alter Versionsnummer', async () => {
+    test('Vorhandenes Film aendern, aber mit alter Versionsnummer', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -255,7 +255,7 @@ describe('PUT /buecher/:id', () => {
         expect(responseBody).to.have.string('Die Versionsnummer');
     });
 
-    test('Vorhandenes Buch aendern, aber ohne Token', async () => {
+    test('Vorhandenes Film aendern, aber ohne Token', async () => {
         // given
         const headers = new Headers({
             'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ describe('PUT /buecher/:id', () => {
         expect(responseBody).to.be.equalIgnoreCase('unauthorized');
     });
 
-    test('Vorhandenes Buch aendern, aber mit falschem Token', async () => {
+    test('Vorhandenes Film aendern, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         const headers = new Headers({

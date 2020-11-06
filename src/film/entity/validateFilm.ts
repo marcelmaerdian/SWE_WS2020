@@ -16,7 +16,7 @@
  */
 
 import { MAX_RATING, logger } from '../../shared';
-import type { Buch } from './film';
+import type { Film } from './film';
 import JSON5 from 'json5';
 import validator from 'validator';
 
@@ -34,24 +34,24 @@ export interface ValidationErrorMsg {
 }
 
 /* eslint-disable max-lines-per-function, no-null/no-null */
-export const validateBuch = (buch: Buch) => {
+export const validateFilm = (film: Film) => {
     const err: ValidationErrorMsg = {};
-    const { titel, art, rating, produktion, datum, prodnr, homepage } = buch;
+    const { titel, art, rating, produktion, datum, prodnr, homepage } = film;
 
     if (titel === undefined || titel === null || titel === '') {
-        err.titel = 'Ein Buch muss einen Titel haben.';
+        err.titel = 'Ein Film muss einen Titel haben.';
     } else if (!/^\w.*/u.test(titel)) {
         err.titel =
-            'Ein Buchtitel muss mit einem Buchstaben, einer Ziffer oder _ beginnen.';
+            'Ein Filmtitel muss mit einem Buchstaben, einer Ziffer oder _ beginnen.';
     }
 
     if (art === undefined || art === null || art === '') {
-        err.art = 'Die Art eines Buches muss gesetzt sein';
+        err.art = 'Die Art eines Films muss gesetzt sein';
     } else if (
-        (art as unknown) !== '3DIMENSIONAL' &&
-        (art as unknown) !== '2DIMENSIONAL'
+        (art as unknown) !== 'DREIDIMENSIONAL' &&
+        (art as unknown) !== 'ZWEIDIMENSIONAL'
     ) {
-        err.art = 'Die Art eines Buches muss 3DIMENSIONAL oder 2DIMENSIONAL sein.';
+        err.art = 'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.';
     }
 
     if (
@@ -63,13 +63,13 @@ export const validateBuch = (buch: Buch) => {
     }
 
     if (produktion === undefined || produktion === null || produktion === '') {
-        err.produktion = 'Der Produktion des Buches muss gesetzt sein.';
+        err.produktion = 'Der Produktion des Films muss gesetzt sein.';
     } else if (
         (produktion as unknown) !== 'FOO_PRODUKTION' &&
         (produktion as unknown) !== 'BAR_PRODUKTION'
     ) {
         err.produktion =
-            'Der Produktion eines Buches muss FOO_PRODUKTION oder BAR_PRODUKTION sein.';
+            'Der Produktion eines Films muss FOO_PRODUKTION oder BAR_PRODUKTION sein.';
     }
 
     if (typeof datum === 'string' && !isISO8601(datum)) {
@@ -96,7 +96,7 @@ export const validateBuch = (buch: Buch) => {
         err.homepage = `'${homepage}' ist keine gueltige URL.`;
     }
 
-    logger.debug(`validateBuch: err=${JSON5.stringify(err)}`);
+    logger.debug(`validateFilm: err=${JSON5.stringify(err)}`);
     return Object.entries(err).length === 0 ? undefined : err;
 };
 /* eslint-enable max-lines-per-function, no-null/no-null */

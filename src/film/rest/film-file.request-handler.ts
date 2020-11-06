@@ -88,7 +88,7 @@ export class BuchFileRequestHandler {
         const { id } = req.params;
         logger.debug(`BuchFileRequestHandler.downloadBinary(): ${id}`);
         if ((id as string | undefined) === undefined) {
-            res.status(HttpStatus.BAD_REQUEST).send('Keine Buch-Id');
+            res.status(HttpStatus.BAD_REQUEST).send('Keine Film-Id');
             return;
         }
 
@@ -119,7 +119,7 @@ export class BuchFileRequestHandler {
     ) {
         if (err instanceof BuchNotExists) {
             const { id } = err;
-            const msg = `Es gibt kein Buch mit der ID "${id}".`;
+            const msg = `Es gibt kein Film mit der ID "${id}".`;
             logger.debug(
                 `BuchFileRequestHandler.handleDownloadError(): msg=${msg}`,
             );

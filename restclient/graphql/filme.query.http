@@ -26,7 +26,7 @@ Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher {
+  filme {
     id
     titel
     art
@@ -34,13 +34,13 @@ X-REQUEST-TYPE: GraphQL
   }
 }
 
-### Suche titel, art, prodnr und version von einem Buch mit vorhandener Buch-ID
+### Suche titel, art, prodnr und version von einem Film mit vorhandener Film-ID
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buch(id: "00000000-0000-0000-0000-000000000001") {
+  film(id: "00000000-0000-0000-0000-000000000001") {
     titel
     art
     prodnr
@@ -54,7 +54,7 @@ Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher(titel: "Alpha") {
+  filme(titel: "Alpha") {
     titel
     art
   }
@@ -67,7 +67,7 @@ Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  buecher(titel: "a") {
+  filme(titel: "a") {
     titel
     art
     schlagwoerter

@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { buch, buecher } from './film';
-import type { Buch } from '../../entity';
+import { film, filme } from './film';
+import type { Film } from '../../entity';
 import JSON5 from 'json5';
 import { logger } from '../../../shared';
 import { v4 as uuid } from 'uuid';
@@ -24,25 +24,25 @@ import { v4 as uuid } from 'uuid';
 /* eslint-disable @typescript-eslint/no-unused-vars,require-await,@typescript-eslint/require-await */
 export class BuchServiceMock {
     async findById(id: string) {
-        buch._id = id;
-        return buch;
+        film._id = id;
+        return film;
     }
 
     async find(_?: unknown) {
-        return buecher;
+        return filme;
     }
 
-    async create(buchData: Buch) {
+    async create(buchData: Film) {
         buchData._id = uuid();
-        logger.info(`Neues Buch: ${JSON5.stringify(buchData)}`);
+        logger.info(`Neues Film: ${JSON5.stringify(buchData)}`);
         return buchData;
     }
 
-    async update(buchData: Buch) {
+    async update(buchData: Film) {
         if (buchData.__v !== undefined) {
             buchData.__v++;
         }
-        logger.info(`Aktualisiertes Buch: ${JSON5.stringify(buchData)}`);
+        logger.info(`Aktualisiertes Film: ${JSON5.stringify(buchData)}`);
         return Promise.resolve(buchData);
     }
 

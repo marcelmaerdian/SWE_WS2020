@@ -23,6 +23,6 @@ const buchService = new BuchService();
 
 export const suche = async (req: Request, res: Response) => {
     logger.error(`suche(): ${req.url}`);
-    const buecher = await buchService.find();
-    res.render('suche', { title: 'Suche', buecher });
+    const filme = await buchService.find();
+    res.render('suche', { title: 'Suche', filme });
 };

@@ -17,27 +17,27 @@
 ### N e t z w e r k   -  V e r b i n d u n g   n o t w e n d i g
 ###
 
-@host = localhost:3000/api/buecher
-#@host = gener-iert-12345.herokuapp.com/api/buecher
+@host = localhost:3000/api/filme
+#@host = gener-iert-12345.herokuapp.com/api/filme
 
-### Suche alle Buecher
+### Suche alle Filme
 https://{{host}}
 
-### Suche mit vorhandener Buch-ID
+### Suche mit vorhandener Film-ID
 https://{{host}}/00000000-0000-0000-0000-000000000001
 
-### Suche mit vorhandener Buch-ID und Versionsnummer
+### Suche mit vorhandener Film-ID und Versionsnummer
 https://{{host}}/00000000-0000-0000-0000-000000000001
 If-None-Match: "0"
 
-### Suche mit vorhandener Buch-ID und falscher Versionsnummer
+### Suche mit vorhandener Film-ID und falscher Versionsnummer
 https://{{host}}/00000000-0000-0000-0000-000000000001
 If-None-Match: 0
 
-### Suche mit ungueltiger Buch-ID
+### Suche mit ungueltiger Film-ID
 https://{{host}}/YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY
 
-### Suche mit nicht-vorhandener Buch-ID
+### Suche mit nicht-vorhandener Film-ID
 https://{{host}}/99999999-9999-9999-9999-999999999999
 
 ### Suche mit vorhandenem Titel
@@ -56,13 +56,13 @@ https://{{host}}?javascript=true
 https://{{host}}?typescript=true
 
 ### Suche mit gueltiger Buchart
-https://{{host}}?art=3DIMENSIONAL
+https://{{host}}?art=DREIDIMENSIONAL
 
 ### Suche mit gueltigem Rating
 https://{{host}}?rating=1
 
-### Suche lieferbare Buecher
+### Suche lieferbare Filme
 https://{{host}}?lieferbar=true
 
-### Optionen zu Buch-ID
+### Optionen zu Film-ID
 OPTIONS https://{{host}}/00000000-0000-0000-0000-000000000001

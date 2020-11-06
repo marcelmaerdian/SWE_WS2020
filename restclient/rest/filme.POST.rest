@@ -34,36 +34,36 @@ Content-Type: application/x-www-form-urlencoded
 
 username=admin&password=FALSCH
 
-### Neues Buch anlegen
-POST https://{{host}}/buecher
+### Neues Film anlegen
+POST https://{{host}}/filme
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.json
+< .\json\film-neu.json
 
-### Neues Buch mit ungueltigen Daten anlegen
-POST https://{{host}}/buecher
+### Neues Film mit ungueltigen Daten anlegen
+POST https://{{host}}/filme
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu-invalid.json
+< .\json\film-neu-invalid.json
 
-### Neues Buch anlegen, aber der Titel existiert bereits
-POST https://{{host}}/buecher
+### Neues Film anlegen, aber der Titel existiert bereits
+POST https://{{host}}/filme
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.titel-exists.json
+< .\json\film-neu.titel-exists.json
 
-### Neues Buch anlegen, aber die PRODNR-Nummer existiert bereits
-POST https://{{host}}/buecher
+### Neues Film anlegen, aber die PRODNR-Nummer existiert bereits
+POST https://{{host}}/filme
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\buch-neu.prodnr-exists.json
+< .\json\film-neu.prodnr-exists.json
 
-### Neues Buch ohne Login anlegen
-POST https://{{host}}/buecher
+### Neues Film ohne Login anlegen
+POST https://{{host}}/filme
 Content-Type: application/json
 
-< .\json\buch-neu.json
+< .\json\film-neu.json

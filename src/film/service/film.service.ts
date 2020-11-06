@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import type { Buch, BuchData } from '../entity';
+import type { Film, BuchData } from '../entity';
 import {
     BuchInvalid,
     BuchNotExists,
@@ -66,13 +66,13 @@ export class BuchService {
         }
         logger.debug(`BuchService.findById(): id= ${id}`);
 
-        // ein Buch zur gegebenen ID asynchron suchen
+        // ein Film zur gegebenen ID asynchron suchen
         // Pattern "Active Record" (urspruengl. von Ruby-on-Rails)
         // null falls nicht gefunden
         // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
         // so dass der virtuelle getter "id" auch nicht mehr vorhanden ist
-        const buch = await BuchModel.findById(id).lean<BuchData>();
-        return buch ?? undefined;
+        const film = await BuchModel.findById(id).lean<BuchData>();
+        return film ?? undefined;
     }
 
     async find(query?: any | undefined) {
@@ -82,11 +82,11 @@ export class BuchService {
 
         logger.debug(`BuchService.find(): query=${JSON5.stringify(query)}`);
 
-        // alle Buecher asynchron suchen u. aufsteigend nach titel sortieren
+        // alle Filme asynchron suchen u. aufsteigend nach titel sortieren
         // https://docs.mongodb.org/manual/reference/object-id
         // entries(): { titel: 'a', rating: 5 } => [{ titel: 'x'}, {rating: 5}]
         if (query === undefined || Object.entries(query).length === 0) {
-            logger.debug('BuchService.find(): alle Buecher');
+            logger.debug('BuchService.find(): alle Filme');
             // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
             return BuchModel.find().sort('titel').lean<BuchData>();
         }
@@ -94,7 +94,7 @@ export class BuchService {
         // { titel: 'a', rating: 5, javascript: true }
         const { titel, javascript, typescript, ...dbQuery } = query; // eslint-disable-line @typescript-eslint/no-unsafe-assignment
 
-        // Buecher zur Query (= JSON-Objekt durch Express) asynchron suchen
+        // Filme zur Query (= JSON-Objekt durch Express) asynchron suchen
         if (titel !== undefined) {
             // Titel in der Query: Teilstring des Titels,
             // d.h. "LIKE" als regulaerer Ausdruck
@@ -127,11 +127,11 @@ export class BuchService {
         // leeres Array, falls nichts gefunden wird
         // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
         return BuchModel.find(dbQuery).lean<BuchData>();
-        // Buch.findOne(query), falls das Suchkriterium eindeutig ist
+        // Film.findOne(query), falls das Suchkriterium eindeutig ist
         // bei findOne(query) wird null zurueckgeliefert, falls nichts gefunden
     }
 
-    async create(buchData: Buch) {
+    async create(buchData: Film) {
         if (this.mock !== undefined) {
             return this.mock.create(buchData);
         }
@@ -144,13 +144,13 @@ export class BuchService {
             return result;
         }
 
-        const buch = new BuchModel(buchData);
+        const film = new BuchModel(buchData);
         let buchSaved!: Document;
         // https://www.mongodb.com/blog/post/quick-start-nodejs--mongodb--how-to-implement-transactions
         const session = await startSession();
         try {
             await session.withTransaction(async () => {
-                buchSaved = await buch.save();
+                buchSaved = await film.save();
             });
         } catch (err: unknown) {
             logger.error(
@@ -174,7 +174,7 @@ export class BuchService {
         return buchDataSaved;
     }
 
-    async update(buchData: Buch, versionStr: string) {
+    async update(buchData: Film, versionStr: string) {
         if (this.mock !== undefined) {
             return this.mock.update(buchData);
         }
@@ -190,15 +190,15 @@ export class BuchService {
         }
 
         // findByIdAndReplace ersetzt ein Document mit ggf. weniger Properties
-        const buch = new BuchModel(buchData);
+        const film = new BuchModel(buchData);
         const updateOptions = { new: true };
         const result = await BuchModel.findByIdAndUpdate(
-            buch._id,
-            buch,
+            film._id,
+            film,
             updateOptions,
         ).lean<BuchData>();
         if (result === null) {
-            return new BuchNotExists(buch._id);
+            return new BuchNotExists(film._id);
         }
 
         if (result.__v !== undefined) {
@@ -207,8 +207,8 @@ export class BuchService {
         logger.debug(`BuchService.update(): result=${JSON5.stringify(result)}`);
 
         // Weitere Methoden von mongoose zum Aktualisieren:
-        //    Buch.findOneAndUpdate(update)
-        //    buch.update(bedingung)
+        //    Film.findOneAndUpdate(update)
+        //    film.update(bedingung)
         return Promise.resolve(result);
     }
 
@@ -218,18 +218,18 @@ export class BuchService {
         }
         logger.debug(`BuchService.delete(): id=${id}`);
 
-        // Das Buch zur gegebenen ID asynchron loeschen
+        // Das Film zur gegebenen ID asynchron loeschen
         const { deletedCount } = await BuchModel.deleteOne({ _id: id }); // eslint-disable-line @typescript-eslint/naming-convention
         logger.debug(`BuchService.delete(): deletedCount=${deletedCount}`);
         return deletedCount !== undefined;
 
         // Weitere Methoden von mongoose, um zu loeschen:
-        //  Buch.findByIdAndRemove(id)
-        //  Buch.findOneAndRemove(bedingung)
+        //  Film.findByIdAndRemove(id)
+        //  Film.findOneAndRemove(bedingung)
     }
 
-    private async validateCreate(buch: Buch) {
-        const msg = validateBuch(buch);
+    private async validateCreate(film: Film) {
+        const msg = validateBuch(film);
         if (msg !== undefined) {
             logger.debug(
                 `BuchService.validateCreate(): Validation Message: ${JSON5.stringify(
@@ -241,12 +241,12 @@ export class BuchService {
 
         // statt 2 sequentiellen DB-Zugriffen waere 1 DB-Zugriff mit OR besser
 
-        const resultTitel = await this.checkTitelExists(buch);
+        const resultTitel = await this.checkTitelExists(film);
         if (resultTitel !== undefined) {
             return resultTitel;
         }
 
-        const resultProdnr = await this.checkProdnrExists(buch);
+        const resultProdnr = await this.checkProdnrExists(film);
         if (resultProdnr !== undefined) {
             return resultProdnr;
         }
@@ -255,8 +255,8 @@ export class BuchService {
         return undefined;
     }
 
-    private async checkTitelExists(buch: Buch) {
-        const { titel } = buch;
+    private async checkTitelExists(film: Film) {
+        const { titel } = film;
 
         // Pattern "Active Record" (urspruengl. von Ruby-on-Rails)
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -274,8 +274,8 @@ export class BuchService {
         return undefined;
     }
 
-    private async checkProdnrExists(buch: Buch) {
-        const { prodnr } = buch;
+    private async checkProdnrExists(film: Film) {
+        const { prodnr } = film;
         // eslint-disable-next-line @typescript-eslint/naming-convention
         const tmpId = await BuchModel.findOne({ prodnr }, { _id: true }).lean<
             string
@@ -283,7 +283,7 @@ export class BuchService {
 
         if (tmpId !== null) {
             logger.debug(
-                `BuchService.checkProdnrExists(): buch=${JSON5.stringify(tmpId)}`,
+                `BuchService.checkProdnrExists(): film=${JSON5.stringify(tmpId)}`,
             );
             return new ProdnrExists(prodnr as string, tmpId);
         }
@@ -301,8 +301,8 @@ export class BuchService {
 
         const from = '"Joe Doe" <Joe.Doe@acme.com>';
         const to = '"Foo Bar" <Foo.Bar@acme.com>';
-        const subject = `Neues Buch ${buchData._id}`;
-        const body = `Das Buch mit dem Titel <strong>${buchData.titel}</strong> ist angelegt`;
+        const subject = `Neues Film ${buchData._id}`;
+        const body = `Das Film mit dem Titel <strong>${buchData.titel}</strong> ist angelegt`;
 
         const data: SendMailOptions = { from, to, subject, html: body };
         logger.debug(`sendMail(): data = ${JSON5.stringify(data)}`);
@@ -319,7 +319,7 @@ export class BuchService {
         }
     }
 
-    private async validateUpdate(buch: BuchData, versionStr: string) {
+    private async validateUpdate(film: BuchData, versionStr: string) {
         const result = this.validateVersion(versionStr);
         if (typeof result !== 'number') {
             return result;
@@ -328,21 +328,21 @@ export class BuchService {
         const version = result;
         logger.debug(`BuchService.validateUpdate(): version=${version}`);
         logger.debug(
-            `BuchService.validateUpdate(): buch=${JSON5.stringify(buch)}`,
+            `BuchService.validateUpdate(): film=${JSON5.stringify(film)}`,
         );
 
-        const validationMsg = validateBuch(buch);
+        const validationMsg = validateBuch(film);
         if (validationMsg !== undefined) {
             return new BuchInvalid(validationMsg);
         }
 
-        const resultTitel = await this.checkTitelExists(buch);
-        if (resultTitel !== undefined && resultTitel.id !== buch._id) {
+        const resultTitel = await this.checkTitelExists(film);
+        if (resultTitel !== undefined && resultTitel.id !== film._id) {
             return resultTitel;
         }
 
         const resultIdAndVersion = await this.checkIdAndVersion(
-            buch._id,
+            film._id,
             version,
         );
         if (resultIdAndVersion !== undefined) {

@@ -18,7 +18,7 @@
 ###
 
 @host = localhost:3000/html
-#@host = gener-iert-12345.herokuapp.com/api/buecher
+#@host = gener-iert-12345.herokuapp.com/api/filme
 
 ### Homepage
 https://{{host}}

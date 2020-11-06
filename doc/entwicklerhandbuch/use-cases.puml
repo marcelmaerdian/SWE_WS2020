@@ -22,12 +22,12 @@ actor Gast
 actor Admin
 
 rectangle kunde {
-    Gast --> (Buch suchen)
+    Gast --> (Film suchen)
     Gast --> (Datei herunterladen)
-    Admin --> (Buch suchen)
-    Admin --> (Buch anlegen)
-    Admin --> (Buch ändern)
-    Admin --> (Buch löschen)
+    Admin --> (Film suchen)
+    Admin --> (Film anlegen)
+    Admin --> (Film ändern)
+    Admin --> (Film löschen)
     Admin --> (Datei hochladen)
     Admin --> (Datei herunterladen)
 }

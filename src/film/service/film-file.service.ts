@@ -31,10 +31,10 @@ export class BuchFileService {
             `BuchFileService.save(): id = ${id}, contentType=${contentType}`,
         );
 
-        // Gibt es ein Buch zur angegebenen ID?
-        const buch = await BuchModel.findById(id);
+        // Gibt es ein Film zur angegebenen ID?
+        const film = await BuchModel.findById(id);
         // eslint-disable-next-line no-null/no-null
-        if (buch === null) {
+        if (film === null) {
             return false;
         }
 
@@ -104,10 +104,10 @@ export class BuchFileService {
     private async checkFilename(filename: string) {
         logger.debug(`BuchFileService.checkFilename(): filename=${filename}`);
 
-        // Gibt es ein Buch mit dem gegebenen "filename" als ID?
-        const buch = await BuchModel.findById(filename);
+        // Gibt es ein Film mit dem gegebenen "filename" als ID?
+        const film = await BuchModel.findById(filename);
         // eslint-disable-next-line no-null/no-null
-        if (buch === null) {
+        if (film === null) {
             const result = new BuchNotExists(filename);
             logger.debug(
                 `BuchFileService.checkFilename(): BuchNotExists=${JSON5.stringify(
@@ -118,7 +118,7 @@ export class BuchFileService {
         }
 
         logger.debug(
-            `BuchFileService.checkFilename(): buch=${JSON5.stringify(buch)}`,
+            `BuchFileService.checkFilename(): film=${JSON5.stringify(film)}`,
         );
 
         return undefined;

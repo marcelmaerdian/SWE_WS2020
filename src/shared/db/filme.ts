@@ -17,12 +17,12 @@
 
 /* eslint-disable @typescript-eslint/naming-convention */
 
-export const buecher = [
+export const filme = [
     {
         _id: '00000000-0000-0000-0000-000000000001',
         titel: 'Alpha',
         rating: 4,
-        art: '2DIMENSIONAL',
+        art: 'ZWEIDIMENSIONAL',
         produktion: 'FOO_PRODUKTION',
         preis: 11.1,
         rabatt: 0.011,
@@ -50,7 +50,7 @@ export const buecher = [
         _id: '00000000-0000-0000-0000-000000000002',
         titel: 'Beta',
         rating: 2,
-        art: '3DIMENSIONAL',
+        art: 'DREIDIMENSIONAL',
         produktion: 'BAR_PRODUKTION',
         preis: 22.2,
         rabatt: 0.022,
@@ -73,7 +73,7 @@ export const buecher = [
         _id: '00000000-0000-0000-0000-000000000003',
         titel: 'Gamma',
         rating: 1,
-        art: '2DIMENSIONAL',
+        art: 'ZWEIDIMENSIONAL',
         produktion: 'FOO_PRODUKTION',
         preis: 33.3,
         rabatt: 0.033,
@@ -96,7 +96,7 @@ export const buecher = [
         _id: '00000000-0000-0000-0000-000000000004',
         titel: 'Delta',
         rating: 3,
-        art: '2DIMENSIONAL',
+        art: 'ZWEIDIMENSIONAL',
         produktion: 'BAR_PRODUKTION',
         preis: 44.4,
         rabatt: 0.044,
@@ -119,7 +119,7 @@ export const buecher = [
         _id: '00000000-0000-0000-0000-000000000005',
         titel: 'Epsilon',
         rating: 2,
-        art: '3DIMENSIONAL',
+        art: 'DREIDIMENSIONAL',
         produktion: 'FOO_PRODUKTION',
         preis: 55.5,
         rabatt: 0.055,
