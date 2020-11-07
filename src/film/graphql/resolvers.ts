@@ -1,6 +1,6 @@
 import {
-    BuchInvalid,
-    BuchNotExists,
+    FilmInvalid,
+    FilmNotExists,
     TitelExists,
     VersionInvalid,
     VersionOutdated,
@@ -23,11 +23,11 @@ import {
  */
 
 import type { Film } from './../entity';
-import { BuchService } from '../service';
+import { FilmService } from '../service';
 // import type { IResolvers } from 'graphql-tools';
 import { logger } from '../../shared';
 
-const buchService = new BuchService();
+const filmService = new FilmService();
 
 // https://www.apollographql.com/docs/apollo-server/data/resolvers
 // Zugriff auf Header-Daten, z.B. Token
@@ -43,17 +43,17 @@ const withIdAndVersion = (film: Film) => {
     return film;
 };
 
-const findBuchById = async (id: string) => {
-    const film = await buchService.findById(id);
+const findFilmById = async (id: string) => {
+    const film = await filmService.findById(id);
     if (film === undefined) {
         return;
     }
     return withIdAndVersion(film);
 };
 
-const findBuecher = async (titel: string | undefined) => {
+const findFilme = async (titel: string | undefined) => {
     const suchkriterium = titel === undefined ? {} : { titel };
-    const filme = await buchService.find(suchkriterium);
+    const filme = await filmService.find(suchkriterium);
     return filme.map((film) => withIdAndVersion(film));
 };
 
@@ -65,47 +65,47 @@ interface IdCriteria {
     id: string;
 }
 
-const createBuch = async (film: Film) => {
+const createFilm = async (film: Film) => {
     film.datum = new Date(film.datum as string);
-    const result = await buchService.create(film);
-    console.log(`resolvers createBuch(): result=${JSON.stringify(result)}`);
+    const result = await filmService.create(film);
+    console.log(`resolvers createFilm(): result=${JSON.stringify(result)}`);
     return result;
 };
 
 const logUpdateResult = (
     result:
         | Film
-        | BuchInvalid
+        | FilmInvalid
         | TitelExists
-        | BuchNotExists
+        | FilmNotExists
         | VersionInvalid
         | VersionOutdated,
 ) => {
-    if (result instanceof BuchInvalid) {
+    if (result instanceof FilmInvalid) {
         logger.debug(
-            `resolvers updateBuch(): validation msg = ${JSON.stringify(
+            `resolvers updateFilm(): validation msg = ${JSON.stringify(
                 result.msg,
             )}`,
         );
     } else if (result instanceof TitelExists) {
         logger.debug(
-            `resolvers updateBuch(): vorhandener titel = ${result.titel}`,
+            `resolvers updateFilm(): vorhandener titel = ${result.titel}`,
         );
-    } else if (result instanceof BuchNotExists) {
+    } else if (result instanceof FilmNotExists) {
         logger.debug(
-            `resolvers updateBuch(): nicht-vorhandene id = ${result.id}`,
+            `resolvers updateFilm(): nicht-vorhandene id = ${result.id}`,
         );
     } else if (result instanceof VersionInvalid) {
         logger.debug(
-            `resolvers updateBuch(): ungueltige version = ${result.version}`,
+            `resolvers updateFilm(): ungueltige version = ${result.version}`,
         );
     } else if (result instanceof VersionOutdated) {
         logger.debug(
-            `resolvers updateBuch(): alte version = ${result.version}`,
+            `resolvers updateFilm(): alte version = ${result.version}`,
         );
     } else {
         logger.debug(
-            `resolvers updateBuch(): film aktualisiert = ${JSON.stringify(
+            `resolvers updateFilm(): film aktualisiert = ${JSON.stringify(
                 result,
             )}`,
         );
@@ -115,35 +115,35 @@ const logUpdateResult = (
     }
 };
 
-const updateBuch = async (film: Film) => {
+const updateFilm = async (film: Film) => {
     logger.debug(
-        `resolvers updateBuch(): zu aktualisieren = ${JSON.stringify(film)}`,
+        `resolvers updateFilm(): zu aktualisieren = ${JSON.stringify(film)}`,
     );
     const version = film.__v ?? 0;
     film.datum = new Date(film.datum as string);
-    const result = await buchService.update(film, version.toString());
+    const result = await filmService.update(film, version.toString());
     logUpdateResult(result);
     return result;
 };
 
-const deleteBuch = async (id: string) => {
-    const result = await buchService.delete(id);
-    logger.debug(`resolvers deleteBuch(): result = ${result}`);
+const deleteFilm = async (id: string) => {
+    const result = await filmService.delete(id);
+    logger.debug(`resolvers deleteFilm(): result = ${result}`);
     return result;
 };
 
 // Queries passend zu "type Query" in typeDefs.ts
 const query = {
     // Filme suchen, ggf. mit Titel als Suchkriterium
-    filme: (_: unknown, { titel }: TitelCriteria) => findBuecher(titel),
+    filme: (_: unknown, { titel }: TitelCriteria) => findFilme(titel),
     // Ein Film mit einer bestimmten ID suchen
-    film: (_: unknown, { id }: IdCriteria) => findBuchById(id),
+    film: (_: unknown, { id }: IdCriteria) => findFilmById(id),
 };
 
 const mutation = {
-    createBuch: (_: unknown, film: Film) => createBuch(film),
-    updateBuch: (_: unknown, film: Film) => updateBuch(film),
-    deleteBuch: (_: unknown, { id }: IdCriteria) => deleteBuch(id),
+    createFilm: (_: unknown, film: Film) => createFilm(film),
+    updateFilm: (_: unknown, film: Film) => updateFilm(film),
+    deleteFilm: (_: unknown, { id }: IdCriteria) => deleteFilm(id),
 };
 
 export const resolvers /* : IResolvers */ = {

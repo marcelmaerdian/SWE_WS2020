@@ -38,19 +38,19 @@ import { gql } from 'apollo-server-express';
 // (hier: gql) modifiziert. Die Funktion gql wird fuer Syntax-Highlighting und
 // fuer die Formatierung durch Prettier verwendet.
 export const typeDefs = gql`
-    "Enum-Typ fuer die Art eines Buches"
+    "Enum-Typ fuer die Art eines Filmes"
     enum Art {
         ZWEIDIMENSIONAL
         DREIDIMENSIONAL
     }
 
-    "Enum-Typ fuer den Produktion eines Buches"
+    "Enum-Typ fuer den Produktion eines Filmes"
     enum Produktion {
         FOO_PRODUKTION
         BAR_PRODUKTION
     }
 
-    "Datenschema eines Buches, das empfangen oder gesendet wird"
+    "Datenschema eines Filmes, das empfangen oder gesendet wird"
     type Film {
         id: ID!
         version: Int
@@ -58,7 +58,7 @@ export const typeDefs = gql`
         rating: Int
         art: Art
         produktion: Produktion!
-        preis: Float
+        kosten: Float
         rabatt: Float
         lieferbar: Boolean
         datum: String
@@ -75,12 +75,12 @@ export const typeDefs = gql`
 
     "Funktionen, um Filme anzulegen, zu aktualisieren oder zu loeschen"
     type Mutation {
-        createBuch(
+        createFilm(
             titel: String!
             rating: Int
             art: String
             produktion: String!
-            preis: Float
+            kosten: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
@@ -88,13 +88,13 @@ export const typeDefs = gql`
             homepage: String
             schlagwoerter: [String]
         ): Film
-        updateBuch(
+        updateFilm(
             _id: ID
             titel: String!
             rating: Int
             art: String
             produktion: String!
-            preis: Float
+            kosten: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
@@ -103,6 +103,6 @@ export const typeDefs = gql`
             schlagwoerter: [String]
             version: Int
         ): Film
-        deleteBuch(id: ID!): Boolean
+        deleteFilm(id: ID!): Boolean
     }
 `;

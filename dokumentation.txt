@@ -7,3 +7,5 @@ autor   ->  regisseur
 druckausgabe -> zweidimensional
 kindle  ->  dreidimensional
 isbn    ->  prodnr
+titel   ->  titel
+preis   ->  kosten
