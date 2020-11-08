@@ -20,7 +20,7 @@
 @url = https://localhost:3000/graphql
 #@url = https://gener-iert-12345.herokuapp.com/graphql
 
-### Neues Film anlegen
+### Neuer Film anlegen
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL

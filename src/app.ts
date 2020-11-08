@@ -36,7 +36,7 @@ import {
     update,
     upload,
 } from './film/rest';
-import { index, neuesBuch, suche } from './film/html';
+import { index, neuerFilm, suche } from './film/html';
 import { isAdmin, isAdminMitarbeiter, login, validateJwt } from './auth';
 // Einlesen von application/json im Request-Rumpf
 // Fuer multimediale Daten (Videos, Bilder, Audios): raw-body
@@ -226,7 +226,7 @@ class App {
         const router = Router(); // eslint-disable-line new-cap
         router.route('/').get(index);
         router.route('/suche').get(suche);
-        router.route('/neues-film').get(neuesBuch);
+        router.route('/neuer-film').get(neuerFilm);
         this.app.use(PATHS.html, router);
 
         // Alternativen zu Pug: EJS, Handlebars, ...

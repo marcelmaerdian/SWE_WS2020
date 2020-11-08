@@ -17,6 +17,6 @@
 
 import type { Request, Response } from 'express';
 
-export const neuesBuch = (_: Request, res: Response) => {
-    res.render('neues-film', { title: 'Neues Film' });
+export const neuerFilm = (_: Request, res: Response) => {
+    res.render('neuer-film', { title: 'Neuer Film' });
 };

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchNotExists, FileNotFound, MultipleFiles } from './errors';
+import { FilmNotExists, FileNotFound, MultipleFiles } from './errors';
 import { closeMongoDBClient, connectMongoDB, saveReadable } from '../../shared';
 import { BuchModel } from '../entity';
 import { GridFSBucket } from 'mongodb';
@@ -25,10 +25,10 @@ import { Readable } from 'stream';
 import { logger } from '../../shared';
 
 /* eslint-disable unicorn/no-useless-undefined */
-export class BuchFileService {
+export class FilmFileService {
     async save(id: string, buffer: Buffer, contentType: string | undefined) {
         logger.debug(
-            `BuchFileService.save(): id = ${id}, contentType=${contentType}`,
+            `FilmFileService.save(): id = ${id}, contentType=${contentType}`,
         );
 
         // Gibt es ein Film zur angegebenen ID?
@@ -55,7 +55,7 @@ export class BuchFileService {
     }
 
     async find(filename: string) {
-        logger.debug(`BuchFileService.findFile(): filename=${filename}`);
+        logger.debug(`FilmFileService.findFile(): filename=${filename}`);
         const resultCheck = await this.checkFilename(filename);
         if (resultCheck !== undefined) {
             return resultCheck;
@@ -80,7 +80,7 @@ export class BuchFileService {
     }
 
     private async deleteFiles(filename: string, bucket: GridFSBucket) {
-        logger.debug(`BuchFileService.deleteFiles(): filename=${filename}`);
+        logger.debug(`FilmFileService.deleteFiles(): filename=${filename}`);
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/naming-convention
         const idObjects: { _id: ObjectId }[] = await bucket
             .find({ filename })
@@ -88,12 +88,12 @@ export class BuchFileService {
             .toArray();
         const ids = idObjects.map((obj) => obj._id);
         logger.debug(
-            `BuchFileService.deleteFiles(): ids=${JSON5.stringify(ids)}`,
+            `FilmFileService.deleteFiles(): ids=${JSON5.stringify(ids)}`,
         );
         ids.forEach((fileId) =>
             bucket.delete(fileId, () =>
                 logger.debug(
-                    `BuchFileService.deleteFiles(): geloeschte ID=${JSON5.stringify(
+                    `FilmFileService.deleteFiles(): geloeschte ID=${JSON5.stringify(
                         fileId,
                     )}`,
                 ),
@@ -102,15 +102,15 @@ export class BuchFileService {
     }
 
     private async checkFilename(filename: string) {
-        logger.debug(`BuchFileService.checkFilename(): filename=${filename}`);
+        logger.debug(`FilmFileService.checkFilename(): filename=${filename}`);
 
         // Gibt es ein Film mit dem gegebenen "filename" als ID?
         const film = await BuchModel.findById(filename);
         // eslint-disable-next-line no-null/no-null
         if (film === null) {
-            const result = new BuchNotExists(filename);
+            const result = new FilmNotExists(filename);
             logger.debug(
-                `BuchFileService.checkFilename(): BuchNotExists=${JSON5.stringify(
+                `FilmFileService.checkFilename(): FilmNotExists=${JSON5.stringify(
                     result,
                 )}`,
             );
@@ -118,7 +118,7 @@ export class BuchFileService {
         }
 
         logger.debug(
-            `BuchFileService.checkFilename(): film=${JSON5.stringify(film)}`,
+            `FilmFileService.checkFilename(): film=${JSON5.stringify(film)}`,
         );
 
         return undefined;
@@ -137,7 +137,7 @@ export class BuchFileService {
             case 0: {
                 const error = new FileNotFound(filename);
                 logger.debug(
-                    `BuchFileService.getContentType(): FileNotFound=${JSON5.stringify(
+                    `FilmFileService.getContentType(): FileNotFound=${JSON5.stringify(
                         error,
                     )}`,
                 );
@@ -148,7 +148,7 @@ export class BuchFileService {
                 const [file] = files;
                 const { contentType }: { contentType: string } = file.metadata;
                 logger.debug(
-                    `BuchFileService.getContentType(): contentType=${contentType}`,
+                    `FilmFileService.getContentType(): contentType=${contentType}`,
                 );
                 return contentType;
             }
@@ -156,7 +156,7 @@ export class BuchFileService {
             default: {
                 const error = new MultipleFiles(filename);
                 logger.debug(
-                    `BuchFileService.getContentType(): MultipleFiles=${JSON5.stringify(
+                    `FilmFileService.getContentType(): MultipleFiles=${JSON5.stringify(
                         error,
                     )}`,
                 );

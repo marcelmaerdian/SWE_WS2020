@@ -169,7 +169,7 @@ describe('PUT /filme/:id', () => {
         expect(response.status).to.be.equal(HttpStatus.PRECONDITION_FAILED);
         const responseBody = await response.text();
         expect(responseBody).to.be.equal(
-            `Es gibt kein Film mit der ID "${idNichtVorhanden}".`,
+            `Es gibt keinen Film mit der ID "${idNichtVorhanden}".`,
         );
     });
 

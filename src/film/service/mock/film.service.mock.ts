@@ -32,18 +32,18 @@ export class BuchServiceMock {
         return filme;
     }
 
-    async create(buchData: Film) {
-        buchData._id = uuid();
-        logger.info(`Neues Film: ${JSON5.stringify(buchData)}`);
-        return buchData;
+    async create(filmData: Film) {
+        filmData._id = uuid();
+        logger.info(`Neuer Film: ${JSON5.stringify(filmData)}`);
+        return filmData;
     }
 
-    async update(buchData: Film) {
-        if (buchData.__v !== undefined) {
-            buchData.__v++;
+    async update(filmData: Film) {
+        if (filmData.__v !== undefined) {
+            filmData.__v++;
         }
-        logger.info(`Aktualisiertes Film: ${JSON5.stringify(buchData)}`);
-        return Promise.resolve(buchData);
+        logger.info(`Aktualisiertes Film: ${JSON5.stringify(filmData)}`);
+        return Promise.resolve(filmData);
     }
 
     async remove(id: string) {

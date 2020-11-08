@@ -33,21 +33,21 @@ package film {
     class "validateBuch()" as validateBuch
     hide validateBuch circle
 
-    interface BuchData <<entity>>
+    interface FilmData <<entity>>
   }
 
   package service #DDDDDD {
-    BuchService ..> Promise
-    BuchService ..> BuchModel
-    BuchService ..> BuchData
-    BuchService ..> validateBuch
-    BuchService ..> sendMail
+    FilmService ..> Promise
+    FilmService ..> BuchModel
+    FilmService ..> FilmData
+    FilmService ..> validateBuch
+    FilmService ..> sendMail
 
-    class BuchService << control >> {
-      + async findById(id: string): Promise<BuchData | undefined>
-      + async find(query?: any): Promise<Array<BuchData>>
-      + async create(film: BuchData): Promise<BuchData>
-      + async update(film: BuchData, version: string): Promise<BuchData>
+    class FilmService << control >> {
+      + async findById(id: string): Promise<FilmData | undefined>
+      + async find(query?: any): Promise<Array<FilmData>>
+      + async create(film: FilmData): Promise<FilmData>
+      + async update(film: FilmData, version: string): Promise<FilmData>
       + async delete(id: string): Promise<boolean>
     }
   }

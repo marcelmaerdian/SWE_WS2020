@@ -19,67 +19,67 @@
 
 import type { ValidationErrorMsg } from './../entity';
 
-export class BuchServiceError {} // eslint-disable-line @typescript-eslint/no-extraneous-class
+export class FilmServiceError {} // eslint-disable-line @typescript-eslint/no-extraneous-class
 
-export class BuchInvalid extends BuchServiceError {
+export class FilmInvalid extends FilmServiceError {
     constructor(readonly msg: ValidationErrorMsg) {
         super();
     }
 }
 
-export class TitelExists extends BuchServiceError {
+export class TitelExists extends FilmServiceError {
     constructor(readonly titel: string, readonly id: string) {
         super();
     }
 }
 
-export class ProdnrExists extends BuchServiceError {
+export class ProdnrExists extends FilmServiceError {
     constructor(readonly prodnr: string, readonly id: string) {
         super();
     }
 }
 
-export type CreateError = BuchInvalid | TitelExists | ProdnrExists;
+export type CreateError = FilmInvalid | TitelExists | ProdnrExists;
 
-export class VersionInvalid extends BuchServiceError {
+export class VersionInvalid extends FilmServiceError {
     constructor(readonly version: string | undefined) {
         super();
     }
 }
 
-export class VersionOutdated extends BuchServiceError {
+export class VersionOutdated extends FilmServiceError {
     constructor(readonly id: string, readonly version: number) {
         super();
     }
 }
 
-export class BuchNotExists extends BuchServiceError {
+export class FilmNotExists extends FilmServiceError {
     constructor(readonly id: string | undefined) {
         super();
     }
 }
 
 export type UpdateError =
-    | BuchInvalid
-    | BuchNotExists
+    | FilmInvalid
+    | FilmNotExists
     | TitelExists
     | VersionInvalid
     | VersionOutdated;
 
-export class BuchFileServiceError {} // eslint-disable-line @typescript-eslint/no-extraneous-class
+export class FilmFileServiceError {} // eslint-disable-line @typescript-eslint/no-extraneous-class
 
-export class FileNotFound extends BuchFileServiceError {
+export class FileNotFound extends FilmFileServiceError {
     constructor(readonly filename: string) {
         super();
     }
 }
 
-export class MultipleFiles extends BuchFileServiceError {
+export class MultipleFiles extends FilmFileServiceError {
     constructor(readonly filename: string) {
         super();
     }
 }
 
-export type DownloadError = BuchNotExists | FileNotFound | MultipleFiles;
+export type DownloadError = FilmNotExists | FileNotFound | MultipleFiles;
 
 /* eslint-enable max-classes-per-file, @typescript-eslint/no-type-alias */

@@ -40,12 +40,12 @@ App ..> express
 
 package film {
   package entity {
-    interface BuchData <<entity>> {
+    interface FilmData <<entity>> {
     }
   }
 
   package service {
-    class BuchService << control >> {
+    class FilmService << control >> {
     }
   }
 
@@ -55,10 +55,10 @@ package film {
     "Handler Functions" ..> Promise
     "Handler Functions" ..> BuchHandler
 
-    BuchHandler o--> "1" BuchService : service
+    BuchHandler o--> "1" FilmService : service
     BuchHandler .right.> Request
     BuchHandler ..> Response
-    BuchHandler ..> BuchData
+    BuchHandler ..> FilmData
     BuchHandler ..> Promise
 
     class "Handler Functions" << boundary >> {

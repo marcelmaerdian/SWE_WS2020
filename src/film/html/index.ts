@@ -21,5 +21,5 @@ export const index = (_: Request, res: Response) => {
     res.render('index', { title: 'Beispiel' });
 };
 
-export * from './neues-film';
+export * from './neuer-film';
 export * from './suche';

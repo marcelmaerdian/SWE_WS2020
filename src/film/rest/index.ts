@@ -16,11 +16,11 @@
  */
 
 import type { Request, Response } from 'express';
-import { BuchFileRequestHandler } from './film-file.request-handler';
-import { BuchRequestHandler } from './film.request-handler';
+import { FilmFileRequestHandler } from './film-file.request-handler';
+import { FilmRequestHandler } from './film.request-handler';
 
-const handler = new BuchRequestHandler();
-const fileHandler = new BuchFileRequestHandler();
+const handler = new FilmRequestHandler();
+const fileHandler = new FilmFileRequestHandler();
 
 export const findById = (req: Request, res: Response) =>
     handler.findById(req, res);

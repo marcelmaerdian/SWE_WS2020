@@ -70,9 +70,9 @@ include::BuchHandler.puml[]
 bla bla
 
 .Anwendungskern mit Mongoose
-[plantuml,BuchService,svg]
+[plantuml,FilmService,svg]
 ----
-include::BuchService.puml[]
+include::FilmService.puml[]
 ----
 
 === Interface für Entities und das Mongoose-Model

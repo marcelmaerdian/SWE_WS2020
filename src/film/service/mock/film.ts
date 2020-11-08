@@ -16,11 +16,11 @@
  */
 
 import { BuchArt, Produktion } from '../../entity';
-import type { BuchData } from '../../entity';
+import type { FilmData } from '../../entity';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 
-export const film: BuchData = {
+export const film: FilmData = {
     _id: '00000000-0000-0000-0000-000000000001',
     titel: 'Alpha',
     rating: 4,
@@ -48,7 +48,7 @@ export const film: BuchData = {
     updatedAt: 0,
 };
 
-export const filme: BuchData[] = [
+export const filme: FilmData[] = [
     film,
     {
         _id: '00000000-0000-0000-0000-000000000002',

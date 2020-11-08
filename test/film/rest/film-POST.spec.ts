@@ -40,7 +40,7 @@ const { expect } = chai;
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const neuesBuch: Film = {
+const neuerFilm: Film = {
     titel: 'Neu',
     rating: 1,
     art: BuchArt.ZWEIDIMENSIONAL,
@@ -106,7 +106,7 @@ describe('POST /filme', () => {
     // close(callback?: (err?: Error) => void): this
     afterAll(() => { server.close() });
 
-    test('Neues Film', async () => {
+    test('Neuer Film', async () => {
         // given
         const token = await login(loginUri);
 
@@ -114,7 +114,7 @@ describe('POST /filme', () => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuch);
+        const body = JSON.stringify(neuerFilm);
         const request = new Request(buecherUri, {
             method: HttpMethod.POST,
             headers,
@@ -144,7 +144,7 @@ describe('POST /filme', () => {
         expect(responseBody).to.be.empty;
     });
 
-    test('Neues Film mit ungueltigen Daten', async () => {
+    test('Neuer Film mit ungueltigen Daten', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -177,7 +177,7 @@ describe('POST /filme', () => {
         expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
     });
 
-    test('Neues Film, aber der Titel existiert bereits', async () => {
+    test('Neuer Film, aber der Titel existiert bereits', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -201,7 +201,7 @@ describe('POST /filme', () => {
         expect(responseBody).has.string('Titel');
     });
 
-    test('Neues Film, aber ohne Token', async () => {
+    test('Neuer Film, aber ohne Token', async () => {
         // given
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const body = JSON.stringify(neuesBuchTitelExistiert);
@@ -221,14 +221,14 @@ describe('POST /filme', () => {
         expect(responseBody).to.be.equalIgnoreCase('unauthorized');
     });
 
-    test('Neues Film, aber mit falschem Token', async () => {
+    test('Neuer Film, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         const headers = new Headers({
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuch);
+        const body = JSON.stringify(neuerFilm);
         const request = new Request(buecherUri, {
             method: HttpMethod.POST,
             headers,

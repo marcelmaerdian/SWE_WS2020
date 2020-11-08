@@ -16,9 +16,9 @@
  */
 
 import {
-    BuchFileService,
-    BuchFileServiceError,
-    BuchNotExists,
+    FilmFileService,
+    FilmFileServiceError,
+    FilmNotExists,
     FileNotFound,
     MultipleFiles,
 } from '../service';
@@ -32,12 +32,12 @@ import JSON5 from 'json5';
 // http://tc39.github.io/ecmascript-export
 // https://nemethgergely.com/async-function-best-practices#Using-async-functions-with-express
 
-export class BuchFileRequestHandler {
-    private readonly service = new BuchFileService();
+export class FilmFileRequestHandler {
+    private readonly service = new FilmFileService();
 
     upload(req: Request, res: Response) {
         const { id } = req.params;
-        logger.debug(`BuchFileRequestHandler.uploadBinary(): id=${id}`);
+        logger.debug(`FilmFileRequestHandler.uploadBinary(): id=${id}`);
 
         // https://jsao.io/2019/06/uploading-and-downloading-files-buffering-in-node-js
 
@@ -51,17 +51,17 @@ export class BuchFileRequestHandler {
         req.on('data', (chunk: Uint8Array) => {
             const { length } = chunk;
             logger.debug(
-                `BuchFileRequestHandler.uploadBinary(): data ${length}`,
+                `FilmFileRequestHandler.uploadBinary(): data ${length}`,
             );
             data.push(chunk);
             totalBytesInBuffer += length;
         })
             .on('aborted', () =>
-                logger.debug('BuchFileRequestHandler.uploadBinary(): aborted'),
+                logger.debug('FilmFileRequestHandler.uploadBinary(): aborted'),
             )
             .on('end', () => {
                 logger.debug(
-                    `BuchFileRequestHandler.uploadBinary(): end ${totalBytesInBuffer}`,
+                    `FilmFileRequestHandler.uploadBinary(): end ${totalBytesInBuffer}`,
                 );
                 const buffer = Buffer.concat(data, totalBytesInBuffer);
 
@@ -86,7 +86,7 @@ export class BuchFileRequestHandler {
 
     async download(req: Request, res: Response) {
         const { id } = req.params;
-        logger.debug(`BuchFileRequestHandler.downloadBinary(): ${id}`);
+        logger.debug(`FilmFileRequestHandler.downloadBinary(): ${id}`);
         if ((id as string | undefined) === undefined) {
             res.status(HttpStatus.BAD_REQUEST).send('Keine Film-Id');
             return;
@@ -94,8 +94,8 @@ export class BuchFileRequestHandler {
 
         const findResult = await this.service.find(id);
         if (
-            findResult instanceof BuchFileServiceError ||
-            findResult instanceof BuchNotExists
+            findResult instanceof FilmFileServiceError ||
+            findResult instanceof FilmNotExists
         ) {
             this.handleDownloadError(findResult, res);
             return;
@@ -114,14 +114,14 @@ export class BuchFileRequestHandler {
     }
 
     private handleDownloadError(
-        err: BuchNotExists | DownloadError,
+        err: FilmNotExists | DownloadError,
         res: Response,
     ) {
-        if (err instanceof BuchNotExists) {
+        if (err instanceof FilmNotExists) {
             const { id } = err;
-            const msg = `Es gibt kein Film mit der ID "${id}".`;
+            const msg = `Es gibt keinen Film mit der ID "${id}".`;
             logger.debug(
-                `BuchFileRequestHandler.handleDownloadError(): msg=${msg}`,
+                `FilmFileRequestHandler.handleDownloadError(): msg=${msg}`,
             );
             res.status(HttpStatus.PRECONDITION_FAILED)
                 .set('Content-Type', 'text/plain')
@@ -133,7 +133,7 @@ export class BuchFileRequestHandler {
             const { filename } = err;
             const msg = `Es gibt kein File mit Name ${filename}`;
             logger.debug(
-                `BuchFileRequestHandler.handleDownloadError(): msg=${msg}`,
+                `FilmFileRequestHandler.handleDownloadError(): msg=${msg}`,
             );
             res.status(HttpStatus.NOT_FOUND).send(msg);
             return;
@@ -143,7 +143,7 @@ export class BuchFileRequestHandler {
             const { filename } = err;
             const msg = `Es gibt mehr als ein File mit Name ${filename}`;
             logger.debug(
-                `BuchFileRequestHandler.handleDownloadError(): msg=${msg}`,
+                `FilmFileRequestHandler.handleDownloadError(): msg=${msg}`,
             );
             res.status(HttpStatus.INTERNAL_ERROR).send(msg);
         }

@@ -19,7 +19,7 @@ import { HttpStatus, serverConfig } from '../../../src/shared';
 import { agent, createTestserver } from '../../testserver';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
 import type { AddressInfo } from 'net';
-import type { BuchData } from '../../../src/film/entity';
+import type { FilmData } from '../../../src/film/entity';
 import { PATHS } from '../../../src/app';
 import type { Server } from 'http';
 import chai from 'chai';
@@ -100,7 +100,7 @@ describe('GET /filme', () => {
             expect(body).not.to.be.empty;
 
             // Jedes Film hat einen Titel mit dem Teilstring 'a'
-            body.map((film: BuchData) => film.titel).forEach((titel: string) =>
+            body.map((film: FilmData) => film.titel).forEach((titel: string) =>
                 expect(titel.toLowerCase()).to.have.string(teilTitel),
             );
         },
@@ -141,7 +141,7 @@ describe('GET /filme', () => {
 
             // Jedes Film hat im Array der Schlagwoerter "javascript"
             body.map(
-                (film: BuchData) => film.schlagwoerter,
+                (film: FilmData) => film.schlagwoerter,
             ).forEach((s: Array<string>) =>
                 expect(s).to.include(schlagwort.toUpperCase()),
             );

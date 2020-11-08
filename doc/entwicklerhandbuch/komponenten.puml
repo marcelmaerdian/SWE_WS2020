@@ -29,8 +29,8 @@ node "Klassen / objektorientiert" {
   [BuchHandler]
   [BuchFileHandler]
 
-  [BuchService]
-  [BuchFileService]
+  [FilmService]
+  [FilmFileService]
 }
 
 [sendMail()] as sendMail
@@ -64,18 +64,18 @@ RESTClient ~~> [Router]
 [Handler Functions] ..> [BuchHandler]
 [Handler Functions] ..> [BuchFileHandler]
 
-[BuchHandler] --> [BuchService]
-[BuchFileHandler] --> [BuchFileService]
-[BuchService] ..> [BuchModel]
-[BuchFileService] ..> [BuchModel]
+[BuchHandler] --> [FilmService]
+[BuchFileHandler] --> [FilmFileService]
+[FilmService] ..> [BuchModel]
+[FilmFileService] ..> [BuchModel]
 
 [BuchModel] ~~> [Mongoose]
-[BuchFileService] ~~> [MongDB\nNative Driver]
+[FilmFileService] ~~> [MongDB\nNative Driver]
 [sendMail] ~~> [nodemailer]
 [Mongoose] ~~> [Collection Film]
 [MongDB\nNative Driver] ~~> [GridFS]
 
-[BuchService] --> [sendMail]
+[FilmService] --> [sendMail]
 [nodemailer] ~~> [Mailserver]
 
 footer (c) Jürgen Zimmermann

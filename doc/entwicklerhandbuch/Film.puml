@@ -36,8 +36,8 @@ package film.entity {
   BuchModel ..> model
   BuchModel ..> validateBuch
 
-  BuchData ..> BuchArt
-  BuchData ..> Produktion
+  FilmData ..> BuchArt
+  FilmData ..> Produktion
 
   enum BuchArt {
     DREIDIMENSIONAL
@@ -49,7 +49,7 @@ package film.entity {
     BAR_PRODUKTION
   }
 
-  interface BuchData <<entity>> {
+  interface FilmData <<entity>> {
     + _id?: string
     + __v?: number
     + createdAt?: number
