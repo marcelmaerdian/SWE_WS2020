@@ -51,7 +51,8 @@ export const validateFilm = (film: Film) => {
         (art as unknown) !== 'DREIDIMENSIONAL' &&
         (art as unknown) !== 'ZWEIDIMENSIONAL'
     ) {
-        err.art = 'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.';
+        err.art =
+            'Die Art eine Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.';
     }
 
     if (
@@ -79,6 +80,7 @@ export const validateFilm = (film: Film) => {
     if (
         prodnr !== undefined &&
         prodnr !== null &&
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         (typeof prodnr !== 'string' || !isPRODNR(prodnr))
     ) {
         err.prodnr = `'${prodnr}' ist keine gueltige PRODNR-Nummer.`;
