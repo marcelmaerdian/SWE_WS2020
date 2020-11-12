@@ -99,7 +99,7 @@ describe('GET /filme', () => {
             const body = await response.json();
             expect(body).not.to.be.empty;
 
-            // Jedes Film hat einen Titel mit dem Teilstring 'a'
+            // Jeder Film hat einen Titel mit dem Teilstring 'a'
             body.map((film: FilmData) => film.titel).forEach((titel: string) =>
                 expect(titel.toLowerCase()).to.have.string(teilTitel),
             );

@@ -26,9 +26,10 @@ import {
     VersionInvalid,
     VersionOutdated,
 } from './errors';
-import { FilmModel, validateBuch } from '../entity';
+import { FilmModel, validateFilm } from '../entity';
 import { dbConfig, logger, mailConfig, serverConfig } from '../../shared';
-import { BuchServiceMock } from './mock';
+import { FilmServiceMock } from './mock';
+// eslint-disable-next-line sort-imports
 import type { Document } from 'mongoose';
 import JSON5 from 'json5';
 import type { SendMailOptions } from 'nodemailer';
@@ -43,11 +44,11 @@ const { mockDB } = dbConfig;
 /* eslint-disable require-await, no-null/no-null, unicorn/no-useless-undefined */
 // BEACHTE: asynchrone Funktionen in der Klasse erfordern kein top-level await
 export class FilmService {
-    private readonly mock: BuchServiceMock | undefined;
+    private readonly mock: FilmServiceMock | undefined;
 
     constructor() {
         if (mockDB) {
-            this.mock = new BuchServiceMock();
+            this.mock = new FilmServiceMock();
         }
     }
 
@@ -162,16 +163,16 @@ export class FilmService {
         } finally {
             session.endSession();
         }
-        const buchDataSaved: FilmData = filmSaved.toObject(); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+        const filmDataSaved: FilmData = filmSaved.toObject(); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
         logger.debug(
-            `FilmService.create(): buchDataSaved=${JSON5.stringify(
-                buchDataSaved,
+            `FilmService.create(): filmDataSaved=${JSON5.stringify(
+                filmDataSaved,
             )}`,
         );
 
-        await this.sendmail(buchDataSaved);
+        await this.sendmail(filmDataSaved);
 
-        return buchDataSaved;
+        return filmDataSaved;
     }
 
     async update(filmData: Film, versionStr: string) {
@@ -229,7 +230,7 @@ export class FilmService {
     }
 
     private async validateCreate(film: Film) {
-        const msg = validateBuch(film);
+        const msg = validateFilm(film);
         if (msg !== undefined) {
             logger.debug(
                 `FilmService.validateCreate(): Validation Message: ${JSON5.stringify(
@@ -302,7 +303,7 @@ export class FilmService {
         const from = '"Joe Doe" <Joe.Doe@acme.com>';
         const to = '"Foo Bar" <Foo.Bar@acme.com>';
         const subject = `Neuer Film ${filmData._id}`;
-        const body = `Das Film mit dem Titel <strong>${filmData.titel}</strong> ist angelegt`;
+        const body = `Der Film mit dem Titel <strong>${filmData.titel}</strong> ist angelegt`;
 
         const data: SendMailOptions = { from, to, subject, html: body };
         logger.debug(`sendMail(): data = ${JSON5.stringify(data)}`);
@@ -331,7 +332,7 @@ export class FilmService {
             `FilmService.validateUpdate(): film=${JSON5.stringify(film)}`,
         );
 
-        const validationMsg = validateBuch(film);
+        const validationMsg = validateFilm(film);
         if (validationMsg !== undefined) {
             return new FilmInvalid(validationMsg);
         }
@@ -379,8 +380,8 @@ export class FilmService {
     }
 
     private async checkIdAndVersion(id: string | undefined, version: number) {
-        const buchDb = await FilmModel.findById(id).lean<FilmData>();
-        if (buchDb === null) {
+        const filmDb = await FilmModel.findById(id).lean<FilmData>();
+        if (filmDb === null) {
             const result = new FilmNotExists(id);
             logger.debug(
                 `FilmService.checkIdAndVersion(): FilmNotExists=${JSON5.stringify(
@@ -390,7 +391,7 @@ export class FilmService {
             return result;
         }
 
-        const versionDb = buchDb.__v ?? 0;
+        const versionDb = filmDb.__v ?? 0;
         if (version < versionDb) {
             const result = new VersionOutdated(id as string, version);
             logger.debug(

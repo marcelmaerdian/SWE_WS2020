@@ -19,6 +19,7 @@ import type { Collection, Db, MongoClient } from 'mongodb';
 import { dbConfig, serverConfig } from './../config';
 import { GridFSBucket } from 'mongodb';
 import { filme } from './filme';
+// eslint-disable-next-line sort-imports
 import { connectMongoDB } from './mongoDB';
 import { createReadStream } from 'fs';
 import { logger } from '../logger';

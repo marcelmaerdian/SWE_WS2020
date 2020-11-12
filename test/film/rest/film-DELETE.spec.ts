@@ -62,7 +62,7 @@ describe('DELETE /filme', () => {
 
     afterAll(() => { server.close() });
 
-    test('Vorhandenes Film loeschen', async () => {
+    test('Vorhandenen Film loeschen', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({ Authorization: `Bearer ${token}` });
