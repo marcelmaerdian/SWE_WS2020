@@ -35,7 +35,7 @@ node "Klassen / objektorientiert" {
 
 [sendMail()] as sendMail
 
-entity BuchModel
+entity FilmModel
 
 cloud {
     [Mongoose]
@@ -66,10 +66,10 @@ RESTClient ~~> [Router]
 
 [BuchHandler] --> [FilmService]
 [BuchFileHandler] --> [FilmFileService]
-[FilmService] ..> [BuchModel]
-[FilmFileService] ..> [BuchModel]
+[FilmService] ..> [FilmModel]
+[FilmFileService] ..> [FilmModel]
 
-[BuchModel] ~~> [Mongoose]
+[FilmModel] ~~> [Mongoose]
 [FilmFileService] ~~> [MongDB\nNative Driver]
 [sendMail] ~~> [nodemailer]
 [Mongoose] ~~> [Collection Film]

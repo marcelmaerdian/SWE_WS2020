@@ -27,8 +27,8 @@ package shared {
 
 package film {
   package entity {
-    class BuchModel
-    hide BuchModel circle
+    class FilmModel
+    hide FilmModel circle
 
     class "validateBuch()" as validateBuch
     hide validateBuch circle
@@ -38,7 +38,7 @@ package film {
 
   package service #DDDDDD {
     FilmService ..> Promise
-    FilmService ..> BuchModel
+    FilmService ..> FilmModel
     FilmService ..> FilmData
     FilmService ..> validateBuch
     FilmService ..> sendMail

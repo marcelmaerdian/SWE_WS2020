@@ -26,7 +26,7 @@ import {
     VersionInvalid,
     VersionOutdated,
 } from './errors';
-import { BuchModel, validateBuch } from '../entity';
+import { FilmModel, validateBuch } from '../entity';
 import { dbConfig, logger, mailConfig, serverConfig } from '../../shared';
 import { BuchServiceMock } from './mock';
 import type { Document } from 'mongoose';
@@ -71,7 +71,7 @@ export class FilmService {
         // null falls nicht gefunden
         // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
         // so dass der virtuelle getter "id" auch nicht mehr vorhanden ist
-        const film = await BuchModel.findById(id).lean<FilmData>();
+        const film = await FilmModel.findById(id).lean<FilmData>();
         return film ?? undefined;
     }
 
@@ -88,7 +88,7 @@ export class FilmService {
         if (query === undefined || Object.entries(query).length === 0) {
             logger.debug('FilmService.find(): alle Filme');
             // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
-            return BuchModel.find().sort('titel').lean<FilmData>();
+            return FilmModel.find().sort('titel').lean<FilmData>();
         }
 
         // { titel: 'a', rating: 5, javascript: true }
@@ -126,7 +126,7 @@ export class FilmService {
         // Pattern "Active Record" (urspruengl. von Ruby-on-Rails)
         // leeres Array, falls nichts gefunden wird
         // lean() liefert ein "Plain JavaScript Object" statt ein Mongoose Document
-        return BuchModel.find(dbQuery).lean<FilmData>();
+        return FilmModel.find(dbQuery).lean<FilmData>();
         // Film.findOne(query), falls das Suchkriterium eindeutig ist
         // bei findOne(query) wird null zurueckgeliefert, falls nichts gefunden
     }
@@ -144,7 +144,7 @@ export class FilmService {
             return result;
         }
 
-        const film = new BuchModel(filmData);
+        const film = new FilmModel(filmData);
         let filmSaved!: Document;
         // https://www.mongodb.com/blog/post/quick-start-nodejs--mongodb--how-to-implement-transactions
         const session = await startSession();
@@ -190,9 +190,9 @@ export class FilmService {
         }
 
         // findByIdAndReplace ersetzt ein Document mit ggf. weniger Properties
-        const film = new BuchModel(filmData);
+        const film = new FilmModel(filmData);
         const updateOptions = { new: true };
-        const result = await BuchModel.findByIdAndUpdate(
+        const result = await FilmModel.findByIdAndUpdate(
             film._id,
             film,
             updateOptions,
@@ -219,7 +219,7 @@ export class FilmService {
         logger.debug(`FilmService.delete(): id=${id}`);
 
         // Das Film zur gegebenen ID asynchron loeschen
-        const { deletedCount } = await BuchModel.deleteOne({ _id: id }); // eslint-disable-line @typescript-eslint/naming-convention
+        const { deletedCount } = await FilmModel.deleteOne({ _id: id }); // eslint-disable-line @typescript-eslint/naming-convention
         logger.debug(`FilmService.delete(): deletedCount=${deletedCount}`);
         return deletedCount !== undefined;
 
@@ -260,7 +260,7 @@ export class FilmService {
 
         // Pattern "Active Record" (urspruengl. von Ruby-on-Rails)
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const tmpId = await BuchModel.findOne({ titel }, { _id: true }).lean<
+        const tmpId = await FilmModel.findOne({ titel }, { _id: true }).lean<
             string
         >();
         if (tmpId !== null) {
@@ -277,7 +277,7 @@ export class FilmService {
     private async checkProdnrExists(film: Film) {
         const { prodnr } = film;
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const tmpId = await BuchModel.findOne({ prodnr }, { _id: true }).lean<
+        const tmpId = await FilmModel.findOne({ prodnr }, { _id: true }).lean<
             string
         >();
 
@@ -379,7 +379,7 @@ export class FilmService {
     }
 
     private async checkIdAndVersion(id: string | undefined, version: number) {
-        const buchDb = await BuchModel.findById(id).lean<FilmData>();
+        const buchDb = await FilmModel.findById(id).lean<FilmData>();
         if (buchDb === null) {
             const result = new FilmNotExists(id);
             logger.debug(

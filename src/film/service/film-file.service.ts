@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { FilmNotExists, FileNotFound, MultipleFiles } from './errors';
+import { FileNotFound, FilmNotExists, MultipleFiles } from './errors';
 import { closeMongoDBClient, connectMongoDB, saveReadable } from '../../shared';
-import { BuchModel } from '../entity';
+import { FilmModel } from '../entity';
 import { GridFSBucket } from 'mongodb';
 import JSON5 from 'json5';
 import type { ObjectId } from 'mongodb';
@@ -32,7 +32,7 @@ export class FilmFileService {
         );
 
         // Gibt es ein Film zur angegebenen ID?
-        const film = await BuchModel.findById(id);
+        const film = await FilmModel.findById(id);
         // eslint-disable-next-line no-null/no-null
         if (film === null) {
             return false;
@@ -105,7 +105,7 @@ export class FilmFileService {
         logger.debug(`FilmFileService.checkFilename(): filename=${filename}`);
 
         // Gibt es ein Film mit dem gegebenen "filename" als ID?
-        const film = await BuchModel.findById(filename);
+        const film = await FilmModel.findById(filename);
         // eslint-disable-next-line no-null/no-null
         if (film === null) {
             const result = new FilmNotExists(filename);
