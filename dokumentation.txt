@@ -2,7 +2,7 @@ Hier werden all unsere Dokumentationsschritte veröffentlicht.
 ----------------------------------------------------------------------------------------------------
 buch    ->  film
 ---------------------------------------------duy-08.11.2020-----------------------------------------
-(buecher ->  filme)     //wurde auch geändert oder?
+(filme ->  filme)     //wurde auch geändert oder?
 ----------------------------------------------------------------------------------------------------
 verlag  ->  produktion
 autoren ->  regisseure

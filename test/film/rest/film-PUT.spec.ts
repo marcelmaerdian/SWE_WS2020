@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Produktion } from '../../../src/film/entity';
+import { FilmArt, Produktion } from '../../../src/film/entity';
 import { HttpMethod, agent, createTestserver } from '../../testserver';
 import { HttpStatus, logger, serverConfig } from '../../../src/shared';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
@@ -43,7 +43,7 @@ const geaendertesBuch: object = {
     // prodnr wird nicht geaendet
     titel: 'Geaendert',
     rating: 1,
-    art: BuchArt.ZWEIDIMENSIONAL,
+    art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 33.33,
     rabatt: 0.033,
@@ -58,7 +58,7 @@ const idVorhanden = '00000000-0000-0000-0000-000000000003';
 const geaendertesBuchIdNichtVorhanden: object = {
     titel: 'Nichtvorhanden',
     rating: 1,
-    art: BuchArt.ZWEIDIMENSIONAL,
+    art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 33.33,
     rabatt: 0.033,
@@ -87,7 +87,7 @@ const veraltesBuch: object = {
     // prodnr wird nicht geaendet
     titel: 'Veraltet',
     rating: 1,
-    art: BuchArt.ZWEIDIMENSIONAL,
+    art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 33.33,
     rabatt: 0.033,
@@ -103,7 +103,7 @@ const veraltesBuch: object = {
 // -----------------------------------------------------------------------------
 const path = PATHS.filme;
 let server: Server;
-let buecherUri: string;
+let filmeUri: string;
 let loginUri: string;
 
 // Test-Suite
@@ -114,8 +114,8 @@ describe('PUT /filme/:id', () => {
 
         const address = server.address() as AddressInfo;
         const baseUri = `https://${serverConfig.host}:${address.port}`;
-        buecherUri = `${baseUri}${path}`;
-        logger.info(`buecherUri = ${buecherUri}`);
+        filmeUri = `${baseUri}${path}`;
+        logger.info(`filmeUri = ${filmeUri}`);
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
@@ -130,7 +130,7 @@ describe('PUT /filme/:id', () => {
             'If-Match': '"0"',
         });
         const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -155,7 +155,7 @@ describe('PUT /filme/:id', () => {
             'If-Match': '"0"',
         });
         const body = JSON.stringify(geaendertesBuchIdNichtVorhanden);
-        const request = new Request(`${buecherUri}/${idNichtVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idNichtVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -182,7 +182,7 @@ describe('PUT /filme/:id', () => {
             'If-Match': '"0"',
         });
         const body = JSON.stringify(geaendertesBuchInvalid);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -196,11 +196,11 @@ describe('PUT /filme/:id', () => {
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
         const { art, rating, produktion, datum, prodnr } = await response.json();
         expect(art).to.be.equal(
-            'Die Art eines Buches muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
+            'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
         );
         expect(rating).to.endWith('eine gueltige Bewertung.');
         expect(produktion).to.be.equal(
-            'Der Produktion eines Buches muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
+            'Der Produktion eines Films muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
         expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
@@ -214,7 +214,7 @@ describe('PUT /filme/:id', () => {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -239,7 +239,7 @@ describe('PUT /filme/:id', () => {
             'If-Match': '"-1"',
         });
         const body = JSON.stringify(veraltesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -262,7 +262,7 @@ describe('PUT /filme/:id', () => {
             'If-Match': '"0"',
         });
         const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,
@@ -287,7 +287,7 @@ describe('PUT /filme/:id', () => {
             'If-Match': '"0"',
         });
         const body = JSON.stringify(geaendertesBuch);
-        const request = new Request(`${buecherUri}/${idVorhanden}`, {
+        const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
             body,

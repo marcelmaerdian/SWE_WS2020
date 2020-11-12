@@ -20,7 +20,7 @@
 @url = https://localhost:3000/graphql
 #@url = https://gener-iert-12345.herokuapp.com/graphql
 
-### Suche id, titel, art und version von allen Buechern
+### Suche id, titel, art und version von allen Filmen
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -48,20 +48,20 @@ X-REQUEST-TYPE: GraphQL
   }
 }
 
-### Suche titel und art von Buechern mit vorhandenem Titel
+### Suche titel und art von Filmen mit vorhandenem Titel
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 {
-  filme(titel: "Alpha") {
+  filme(titel: "A-Team") {
     titel
     art
   }
 }
 
 
-### Suche titel, art und schlagwoerter von Buechern mit vorhandenem Titel
+### Suche titel, art und schlagwoerter von Filmen mit vorhandenem Titel
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL

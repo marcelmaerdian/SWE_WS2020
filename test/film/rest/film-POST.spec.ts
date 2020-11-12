@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Produktion } from '../../../src/film/entity';
+import { FilmArt, Produktion } from '../../../src/film/entity';
 import { HttpMethod, agent, createTestserver } from '../../testserver';
 import { HttpStatus, serverConfig, uuidRegexp } from '../../../src/shared';
 import { afterAll, beforeAll, describe, test } from '@jest/globals';
@@ -43,7 +43,7 @@ const { expect } = chai;
 const neuerFilm: Film = {
     titel: 'Neu',
     rating: 1,
-    art: BuchArt.ZWEIDIMENSIONAL,
+    art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 99.99,
     rabatt: 0.099,
@@ -70,7 +70,7 @@ const neuesBuchInvalid: object = {
 const neuesBuchTitelExistiert: Film = {
     titel: 'Alpha',
     rating: 1,
-    art: BuchArt.ZWEIDIMENSIONAL,
+    art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 99.99,
     rabatt: 0.099,
@@ -87,7 +87,7 @@ const neuesBuchTitelExistiert: Film = {
 // -----------------------------------------------------------------------------
 let server: Server;
 const path = PATHS.filme;
-let buecherUri: string;
+let filmeUri: string;
 let loginUri: string;
 
 // Test-Suite
@@ -98,7 +98,7 @@ describe('POST /filme', () => {
 
         const address = server.address() as AddressInfo;
         const baseUri = `https://${serverConfig.host}:${address.port}`;
-        buecherUri = `${baseUri}${path}`;
+        filmeUri = `${baseUri}${path}`;
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
@@ -115,7 +115,7 @@ describe('POST /filme', () => {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(neuerFilm);
-        const request = new Request(buecherUri, {
+        const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -152,7 +152,7 @@ describe('POST /filme', () => {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(neuesBuchInvalid);
-        const request = new Request(buecherUri, {
+        const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -167,11 +167,11 @@ describe('POST /filme', () => {
         const { art, rating, produktion, datum, prodnr } = await response.json();
 
         expect(art).to.be.equal(
-            'Die Art eines Buches muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
+            'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
         );
         expect(rating).to.endWith('eine gueltige Bewertung.');
         expect(produktion).to.be.equal(
-            'Der Produktion eines Buches muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
+            'Der Produktion eines Films muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
         expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
@@ -185,7 +185,7 @@ describe('POST /filme', () => {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(neuesBuchTitelExistiert);
-        const request = new Request(buecherUri, {
+        const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -205,7 +205,7 @@ describe('POST /filme', () => {
         // given
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const body = JSON.stringify(neuesBuchTitelExistiert);
-        const request = new Request(buecherUri, {
+        const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
             body,
@@ -229,7 +229,7 @@ describe('POST /filme', () => {
             'Content-Type': 'application/json',
         });
         const body = JSON.stringify(neuerFilm);
-        const request = new Request(buecherUri, {
+        const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
             body,

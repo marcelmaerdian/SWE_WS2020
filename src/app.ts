@@ -131,7 +131,7 @@ class App {
     }
 
     private routes() {
-        this.buecherRoutes();
+        this.filmeRoutes();
         this.verlagRoutes();
         this.loginRoutes();
         this.buchGraphqlRoutes();
@@ -141,7 +141,7 @@ class App {
         this.app.use(internalError);
     }
 
-    private buecherRoutes() {
+    private filmeRoutes() {
         // vgl: Spring WebFlux.fn
         // https://expressjs.com/en/api.html#router
         // Beispiele fuer "Middleware" bei Express:

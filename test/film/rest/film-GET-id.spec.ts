@@ -71,7 +71,7 @@ const idVorhandenETag = [
 // -----------------------------------------------------------------------------
 let server: Server;
 const path = PATHS.filme;
-let buecherUri: string;
+let filmeUri: string;
 
 // Test-Suite
 describe('GET /filme/:id', () => {
@@ -80,14 +80,14 @@ describe('GET /filme/:id', () => {
         server = await createTestserver();
 
         const address = server.address() as AddressInfo;
-        buecherUri = `https://${serverConfig.host}:${address.port}${path}`;
+        filmeUri = `https://${serverConfig.host}:${address.port}${path}`;
     });
 
     afterAll(() => { server.close() });
 
     each(idVorhanden).test('Film zu vorhandener ID %s', async (id) => {
         // given
-        const uri = `${buecherUri}/${id}`;
+        const uri = `${filmeUri}/${id}`;
 
         // when
         const response = await fetch(uri, { agent });
@@ -105,7 +105,7 @@ describe('GET /filme/:id', () => {
         'Kein Film zu nicht-vorhandener ID %s',
         async (id) => {
             // given
-            const uri = `${buecherUri}/${id}`;
+            const uri = `${filmeUri}/${id}`;
 
             // when
             const response = await fetch(uri, { agent });
@@ -121,7 +121,7 @@ describe('GET /filme/:id', () => {
         'Film zu vorhandener ID %s mit ETag %s',
         async (id, etag) => {
             // given
-            const uri = `${buecherUri}/${id}`;
+            const uri = `${filmeUri}/${id}`;
             const headers = new Headers({ 'If-None-Match': etag });
             const request = new Request(uri, { headers, agent });
 

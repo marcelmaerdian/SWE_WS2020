@@ -55,7 +55,7 @@ https://{{host}}?javascript=true
 ### Suche mit vorhandenem Schlagwort "TYPESCRIPT"
 https://{{host}}?typescript=true
 
-### Suche mit gueltiger Buchart
+### Suche mit gueltiger Filmart
 https://{{host}}?art=DREIDIMENSIONAL
 
 ### Suche mit gueltigem Rating

@@ -47,7 +47,7 @@ export class BuchServiceMock {
     }
 
     async remove(id: string) {
-        logger.info(`ID des geloeschten Buches: ${id}`);
+        logger.info(`ID des geloeschten Films: ${id}`);
         return true;
     }
 }

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BuchArt, Produktion } from '../../entity';
+import { FilmArt, Produktion } from '../../entity';
 import type { FilmData } from '../../entity';
 
 /* eslint-disable @typescript-eslint/naming-convention */
@@ -24,7 +24,7 @@ export const film: FilmData = {
     _id: '00000000-0000-0000-0000-000000000001',
     titel: 'Alpha',
     rating: 4,
-    art: BuchArt.ZWEIDIMENSIONAL,
+    art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.FOO_PRODUKTION,
     preis: 11.1,
     rabatt: 0.011,
@@ -54,7 +54,7 @@ export const filme: FilmData[] = [
         _id: '00000000-0000-0000-0000-000000000002',
         titel: 'Beta',
         rating: 2,
-        art: BuchArt.DREIDIMENSIONAL,
+        art: FilmArt.DREIDIMENSIONAL,
         produktion: Produktion.FOO_PRODUKTION,
         preis: 22.2,
         rabatt: 0.022,

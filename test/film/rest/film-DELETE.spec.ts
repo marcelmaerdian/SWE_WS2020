@@ -45,7 +45,7 @@ const id = '00000000-0000-0000-0000-000000000005';
 // -----------------------------------------------------------------------------
 let server: Server;
 const path = PATHS.filme;
-let buecherUri: string;
+let filmeUri: string;
 let loginUri: string;
 
 // Test-Suite
@@ -56,7 +56,7 @@ describe('DELETE /filme', () => {
 
         const address = server.address() as AddressInfo;
         const baseUri = `https://${serverConfig.host}:${address.port}`;
-        buecherUri = `${baseUri}${path}`;
+        filmeUri = `${baseUri}${path}`;
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
@@ -66,7 +66,7 @@ describe('DELETE /filme', () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({ Authorization: `Bearer ${token}` });
-        const request = new Request(`${buecherUri}/${id}`, {
+        const request = new Request(`${filmeUri}/${id}`, {
             method: HttpMethod.DELETE,
             headers,
             agent,
@@ -83,7 +83,7 @@ describe('DELETE /filme', () => {
 
     test('Film loeschen, aber ohne Token', async () => {
         // given
-        const request = new Request(`${buecherUri}/${id}`, {
+        const request = new Request(`${filmeUri}/${id}`, {
             method: HttpMethod.DELETE,
             agent,
         });
@@ -101,7 +101,7 @@ describe('DELETE /filme', () => {
         // given
         const token = 'FALSCH';
         const headers = new Headers({ Authorization: `Bearer ${token}` });
-        const request = new Request(`${buecherUri}/${id}`, {
+        const request = new Request(`${filmeUri}/${id}`, {
             method: HttpMethod.DELETE,
             headers,
             agent,

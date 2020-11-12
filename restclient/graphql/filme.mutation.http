@@ -26,11 +26,11 @@ Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  createBuch(
+  createFilm(
     titel: "Test"
     rating: 1
     art: "DREIDIMENSIONAL"
-    produktion: "FOO_PRODUKTION"
+    produktion: "CONSTANTIN_FILM"
     preis: 11.1
     rabatt: 0.011
     lieferbar: true
@@ -49,12 +49,12 @@ Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  updateBuch(
+  updateFilm(
     _id: "00000000-0000-0000-0000-000000000003",
     titel: "Geaendert",
     rating: 5,
     art: "ZWEIDIMENSIONAL",
-    produktion: "FOO_PRODUKTION",
+    produktion: "CONSTANTIN_FILM",
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: false,
@@ -71,11 +71,11 @@ mutation {
   }
 }
 
-### Vorhandenes Film loeschen
+### Vorhandenen Film loeschen
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
 mutation {
-  deleteBuch(id: "00000000-0000-0000-0000-000000000004")
+  deleteFilm(id: "00000000-0000-0000-0000-000000000004")
 }

@@ -49,7 +49,7 @@ const schlagwoerterNichtVorhanden = ['csharp', 'php'];
 // -----------------------------------------------------------------------------
 let server: Server;
 const path = PATHS.filme;
-let buecherUri: string;
+let filmeUri: string;
 
 // Test-Suite
 describe('GET /filme', () => {
@@ -57,7 +57,7 @@ describe('GET /filme', () => {
         server = await createTestserver();
 
         const address = server.address() as AddressInfo;
-        buecherUri = `https://${serverConfig.host}:${address.port}${path}`;
+        filmeUri = `https://${serverConfig.host}:${address.port}${path}`;
     });
 
     afterAll(() => { server.close() });
@@ -66,7 +66,7 @@ describe('GET /filme', () => {
         // given
 
         // when
-        const response = await fetch(buecherUri, { agent });
+        const response = await fetch(filmeUri, { agent });
 
         // then
         const { status, headers } = response;
@@ -86,7 +86,7 @@ describe('GET /filme', () => {
         'Filme mit einem Titel, der "%s" enthaelt',
         async (teilTitel) => {
             // given
-            const uri = `${buecherUri}?titel=${teilTitel}`;
+            const uri = `${filmeUri}?titel=${teilTitel}`;
 
             // when
             const response = await fetch(uri, { agent });
@@ -110,7 +110,7 @@ describe('GET /filme', () => {
         'Keine Filme mit einem Titel, der "%s" nicht enthaelt',
         async (teilTitel) => {
             // given
-            const uri = `${buecherUri}?titel=${teilTitel}`;
+            const uri = `${filmeUri}?titel=${teilTitel}`;
 
             // when
             const response = await fetch(uri, { agent });
@@ -126,7 +126,7 @@ describe('GET /filme', () => {
         'Mind. 1 Film mit dem Schlagwort "%s"',
         async (schlagwort) => {
             // given
-            const uri = `${buecherUri}?${schlagwort}=true`;
+            const uri = `${filmeUri}?${schlagwort}=true`;
 
             // when
             const response = await fetch(uri, { agent });
@@ -152,7 +152,7 @@ describe('GET /filme', () => {
         'Keine Filme mit dem Schlagwort "%s"',
         async (schlagwort) => {
             // given
-            const uri = `${buecherUri}?${schlagwort}=true`;
+            const uri = `${filmeUri}?${schlagwort}=true`;
 
             // when
             const response = await fetch(uri, { agent });
