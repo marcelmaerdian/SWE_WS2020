@@ -11,7 +11,7 @@ druckausgabe -> zweidimensional
 kindle  ->  dreidimensional
 isbn    ->  prodnr
 titel   ->  titel
-preis   ->  kosten
+preis   ->  preis
 ---------------------------------------------duy-08.11.2020-----------------------------------------
 /html/index.ts
 ./neuer-film -> ./neuer-film

@@ -58,7 +58,7 @@ export const typeDefs = gql`
         rating: Int
         art: Art
         produktion: Produktion!
-        kosten: Float
+        preis: Float
         rabatt: Float
         lieferbar: Boolean
         datum: String
@@ -80,7 +80,7 @@ export const typeDefs = gql`
             rating: Int
             art: String
             produktion: String!
-            kosten: Float
+            preis: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
@@ -94,7 +94,7 @@ export const typeDefs = gql`
             rating: Int
             art: String
             produktion: String!
-            kosten: Float
+            preis: Float
             rabatt: Float
             lieferbar: Boolean
             datum: String
