@@ -60,9 +60,9 @@ include::komponenten.puml[]
 bla bla
 
 .Handler für die REST-Schnittstelle
-[plantuml,BuchHandler,svg]
+[plantuml,FilmHandler,svg]
 ----
-include::BuchHandler.puml[]
+include::FilmHandler.puml[]
 ----
 
 === Der Anwendungskern

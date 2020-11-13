@@ -46,8 +46,8 @@ export const typeDefs = gql`
 
     "Enum-Typ fuer den Produktion eines Filmes"
     enum Produktion {
-        FOO_PRODUKTION
-        BAR_PRODUKTION
+        CONSTANTIN_FILM
+        BIG_PRODUKTION
     }
 
     "Datenschema eines Filmes, das empfangen oder gesendet wird"

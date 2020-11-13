@@ -30,8 +30,8 @@ package film {
     class FilmModel
     hide FilmModel circle
 
-    class "validateBuch()" as validateBuch
-    hide validateBuch circle
+    class "validateFilm()" as validateFilm
+    hide validateFilm circle
 
     interface FilmData <<entity>>
   }
@@ -40,7 +40,7 @@ package film {
     FilmService ..> Promise
     FilmService ..> FilmModel
     FilmService ..> FilmData
-    FilmService ..> validateBuch
+    FilmService ..> validateFilm
     FilmService ..> sendMail
 
     class FilmService << control >> {

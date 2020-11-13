@@ -26,8 +26,8 @@ node "Funktionen mit Express" {
 }
 
 node "Klassen / objektorientiert" {
-  [BuchHandler]
-  [BuchFileHandler]
+  [FilmHandler]
+  [FilmFileHandler]
 
   [FilmService]
   [FilmFileService]
@@ -61,11 +61,11 @@ node {
 
 RESTClient ~~> [Router]
 [Router] ..> [Handler Functions]
-[Handler Functions] ..> [BuchHandler]
-[Handler Functions] ..> [BuchFileHandler]
+[Handler Functions] ..> [FilmHandler]
+[Handler Functions] ..> [FilmFileHandler]
 
-[BuchHandler] --> [FilmService]
-[BuchFileHandler] --> [FilmFileService]
+[FilmHandler] --> [FilmService]
+[FilmFileHandler] --> [FilmFileService]
 [FilmService] ..> [FilmModel]
 [FilmFileService] ..> [FilmModel]
 

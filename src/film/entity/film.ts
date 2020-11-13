@@ -16,8 +16,8 @@
  */
 
 export enum Produktion {
-    FOO_PRODUKTION = 'FOO_PRODUKTION',
-    BAR_PRODUKTION = 'BAR_PRODUKTION',
+    CONSTANTIN_FILM = 'CONSTANTIN_FILM',
+    BIG_PRODUKTION = 'BIG_PRODUKTION',
 }
 
 export enum FilmArt {

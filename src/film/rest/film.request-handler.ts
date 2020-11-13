@@ -28,6 +28,7 @@ import {
     VersionInvalid,
     VersionOutdated,
 } from '../service';
+// eslint-disable-next-line sort-imports
 import type { CreateError, UpdateError } from '../service';
 import { HttpStatus, getBaseUri, logger, mimeConfig } from '../../shared';
 import type { Request, Response } from 'express';

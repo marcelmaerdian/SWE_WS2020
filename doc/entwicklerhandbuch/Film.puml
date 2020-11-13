@@ -26,15 +26,15 @@ package mongoose {
 }
 
 package film.entity {
-  class "validateBuch()" as validateBuch
-  hide validateBuch circle
+  class "validateFilm()" as validateFilm
+  hide validateFilm circle
 
   class FilmModel
   hide FilmModel circle
 
   FilmModel ..> Schema
   FilmModel ..> model
-  FilmModel ..> validateBuch
+  FilmModel ..> validateFilm
 
   FilmData ..> FilmArt
   FilmData ..> Produktion
@@ -45,8 +45,8 @@ package film.entity {
   }
 
   enum Produktion {
-    FOO_PRODUKTION
-    BAR_PRODUKTION
+    CONSTANTIN_FILM
+    BIG_PRODUKTION
   }
 
   interface FilmData <<entity>> {

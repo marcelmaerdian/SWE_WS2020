@@ -37,3 +37,6 @@ BuchRequestHandler -> FilmRequestHandler
 buchData -> filmData
 buchSaved -> filmSaved
 ----------------------------------------------------------------------------------------------------
+FOO_PRODUKTION -> CONSTANTIN_FILM
+NO_PRODUKTION -> ENDLESS_PRODUKTION
+BAR_PRODUKTION -> BIG_PRODUKTION

@@ -44,7 +44,7 @@ const neuerFilm: Film = {
     titel: 'Neu',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
-    produktion: Produktion.FOO_PRODUKTION,
+    produktion: Produktion.CONSTANTIN_FILM,
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
@@ -54,11 +54,11 @@ const neuerFilm: Film = {
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
     regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
 };
-const neuesBuchInvalid: object = {
+const neuesFilmInvalid: object = {
     titel: 'Blabla',
     rating: -1,
     art: 'UNSICHTBAR',
-    produktion: 'NO_PRODUKTION',
+    produktion: 'ENDLESS_PRODUKTION',
     preis: 0,
     rabatt: 0,
     lieferbar: true,
@@ -67,11 +67,11 @@ const neuesBuchInvalid: object = {
     regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: [],
 };
-const neuesBuchTitelExistiert: Film = {
+const neuesFilmTitelExistiert: Film = {
     titel: 'Alpha',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
-    produktion: Produktion.FOO_PRODUKTION,
+    produktion: Produktion.CONSTANTIN_FILM,
     preis: 99.99,
     rabatt: 0.099,
     lieferbar: true,
@@ -151,7 +151,7 @@ describe('POST /filme', () => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuchInvalid);
+        const body = JSON.stringify(neuesFilmInvalid);
         const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
@@ -171,7 +171,7 @@ describe('POST /filme', () => {
         );
         expect(rating).to.endWith('eine gueltige Bewertung.');
         expect(produktion).to.be.equal(
-            'Der Produktion eines Films muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
+            'Die Produktion eines Films muss CONSTANTIN_FILM oder BIG_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
         expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
@@ -184,7 +184,7 @@ describe('POST /filme', () => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(neuesBuchTitelExistiert);
+        const body = JSON.stringify(neuesFilmTitelExistiert);
         const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,
@@ -204,7 +204,7 @@ describe('POST /filme', () => {
     test('Neuer Film, aber ohne Token', async () => {
         // given
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        const body = JSON.stringify(neuesBuchTitelExistiert);
+        const body = JSON.stringify(neuesFilmTitelExistiert);
         const request = new Request(filmeUri, {
             method: HttpMethod.POST,
             headers,

@@ -42,7 +42,7 @@ export const validateFilm = (film: Film) => {
         err.titel = 'Ein Film muss einen Titel haben.';
     } else if (!/^\w.*/u.test(titel)) {
         err.titel =
-            'Ein Filmtitel muss mit einem Buchstaben, einer Ziffer oder _ beginnen.';
+            'Ein Filmtitel muss mit einem Filmstaben, einer Ziffer oder _ beginnen.';
     }
 
     if (art === undefined || art === null || art === '') {
@@ -64,13 +64,13 @@ export const validateFilm = (film: Film) => {
     }
 
     if (produktion === undefined || produktion === null || produktion === '') {
-        err.produktion = 'Der Produktion des Films muss gesetzt sein.';
+        err.produktion = 'Die Produktion des Films muss gesetzt sein.';
     } else if (
-        (produktion as unknown) !== 'FOO_PRODUKTION' &&
-        (produktion as unknown) !== 'BAR_PRODUKTION'
+        (produktion as unknown) !== 'CONSTANTIN_FILM' &&
+        (produktion as unknown) !== 'BIG_PRODUKTION'
     ) {
         err.produktion =
-            'Der Produktion eines Films muss FOO_PRODUKTION oder BAR_PRODUKTION sein.';
+            'Die Produktion eines Films muss CONSTANTIN_FILM oder BIG_PRODUKTION sein.';
     }
 
     if (typeof datum === 'string' && !isISO8601(datum)) {

@@ -53,13 +53,13 @@ package film {
     "Handler Functions" .right.> Request
     "Handler Functions" ..> Response
     "Handler Functions" ..> Promise
-    "Handler Functions" ..> BuchHandler
+    "Handler Functions" ..> FilmHandler
 
-    BuchHandler o--> "1" FilmService : service
-    BuchHandler .right.> Request
-    BuchHandler ..> Response
-    BuchHandler ..> FilmData
-    BuchHandler ..> Promise
+    FilmHandler o--> "1" FilmService : service
+    FilmHandler .right.> Request
+    FilmHandler ..> Response
+    FilmHandler ..> FilmData
+    FilmHandler ..> Promise
 
     class "Handler Functions" << boundary >> {
       + async findById(req: Request, res: Response): Promise<void>
@@ -70,7 +70,7 @@ package film {
     }
     hide "Handler Functions" << boundary >> circle
 
-    class BuchHandler << control >> {
+    class FilmHandler << control >> {
       + async findById(req: Request, res: Response): Promise<void>
       + async find(req: Request, res: Response): Promise<void>
       + async create(req: Request, res: Response): Promise<void>

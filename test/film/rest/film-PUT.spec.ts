@@ -39,12 +39,12 @@ const { expect } = chai;
 // -----------------------------------------------------------------------------
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
-const geaendertesBuch: object = {
-    // prodnr wird nicht geaendet
+const geaendertesFilm: object = {
+    // prodnr wird nicht geaendert
     titel: 'Geaendert',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
-    produktion: Produktion.FOO_PRODUKTION,
+    produktion: Produktion.CONSTANTIN_FILM,
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
@@ -55,11 +55,11 @@ const geaendertesBuch: object = {
 };
 const idVorhanden = '00000000-0000-0000-0000-000000000003';
 
-const geaendertesBuchIdNichtVorhanden: object = {
+const geaendertesFilmIdNichtVorhanden: object = {
     titel: 'Nichtvorhanden',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
-    produktion: Produktion.FOO_PRODUKTION,
+    produktion: Produktion.CONSTANTIN_FILM,
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
@@ -69,11 +69,11 @@ const geaendertesBuchIdNichtVorhanden: object = {
 };
 const idNichtVorhanden = '00000000-0000-0000-0000-000000000999';
 
-const geaendertesBuchInvalid: object = {
+const geaendertesFilmInvalid: object = {
     titel: 'Alpha',
     rating: -1,
     art: 'UNSICHTBAR',
-    produktion: 'NO_PRODUKTION',
+    produktion: 'ENDLESS_PRODUKTION',
     preis: 0.01,
     rabatt: 0,
     lieferbar: true,
@@ -83,12 +83,12 @@ const geaendertesBuchInvalid: object = {
     schlagwoerter: [],
 };
 
-const veraltesBuch: object = {
+const veraltesFilm: object = {
     // prodnr wird nicht geaendet
     titel: 'Veraltet',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
-    produktion: Produktion.FOO_PRODUKTION,
+    produktion: Produktion.CONSTANTIN_FILM,
     preis: 33.33,
     rabatt: 0.033,
     lieferbar: true,
@@ -121,7 +121,7 @@ describe('PUT /filme/:id', () => {
 
     afterAll(() => { server.close() });
 
-    test('Vorhandenes Film aendern', async () => {
+    test('Vorhandenen Film aendern', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -129,7 +129,7 @@ describe('PUT /filme/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuch);
+        const body = JSON.stringify(geaendertesFilm);
         const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
@@ -146,7 +146,7 @@ describe('PUT /filme/:id', () => {
         expect(responseBody).to.be.empty;
     });
 
-    test('Nicht-vorhandenes Film aendern', async () => {
+    test('Nicht-vorhandenen Film aendern', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -154,7 +154,7 @@ describe('PUT /filme/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuchIdNichtVorhanden);
+        const body = JSON.stringify(geaendertesFilmIdNichtVorhanden);
         const request = new Request(`${filmeUri}/${idNichtVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
@@ -173,7 +173,7 @@ describe('PUT /filme/:id', () => {
         );
     });
 
-    test('Vorhandenes Film aendern, aber mit ungueltigen Daten', async () => {
+    test('Vorhandenen Film aendern, aber mit ungueltigen Daten', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -181,7 +181,7 @@ describe('PUT /filme/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuchInvalid);
+        const body = JSON.stringify(geaendertesFilmInvalid);
         const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
@@ -200,20 +200,20 @@ describe('PUT /filme/:id', () => {
         );
         expect(rating).to.endWith('eine gueltige Bewertung.');
         expect(produktion).to.be.equal(
-            'Der Produktion eines Films muss FOO_PRODUKTION oder BAR_PRODUKTION sein.',
+            'Die Produktion eines Films muss CONSTANTIN_FILM oder BIG_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
         expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
     });
 
-    test('Vorhandenes Film aendern, aber ohne Versionsnummer', async () => {
+    test('Vorhandenen Film aendern, aber ohne Versionsnummer', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
         });
-        const body = JSON.stringify(geaendertesBuch);
+        const body = JSON.stringify(geaendertesFilm);
         const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
@@ -230,7 +230,7 @@ describe('PUT /filme/:id', () => {
         expect(responseBody).to.be.equal('Versionsnummer fehlt');
     });
 
-    test('Vorhandenes Film aendern, aber mit alter Versionsnummer', async () => {
+    test('Vorhandenen Film aendern, aber mit alter Versionsnummer', async () => {
         // given
         const token = await login(loginUri);
         const headers = new Headers({
@@ -238,7 +238,7 @@ describe('PUT /filme/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"-1"',
         });
-        const body = JSON.stringify(veraltesBuch);
+        const body = JSON.stringify(veraltesFilm);
         const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
@@ -255,13 +255,13 @@ describe('PUT /filme/:id', () => {
         expect(responseBody).to.have.string('Die Versionsnummer');
     });
 
-    test('Vorhandenes Film aendern, aber ohne Token', async () => {
+    test('Vorhandenen Film aendern, aber ohne Token', async () => {
         // given
         const headers = new Headers({
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuch);
+        const body = JSON.stringify(geaendertesFilm);
         const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,
@@ -278,7 +278,7 @@ describe('PUT /filme/:id', () => {
         expect(responseBody).to.be.equalIgnoreCase('unauthorized');
     });
 
-    test('Vorhandenes Film aendern, aber mit falschem Token', async () => {
+    test('Vorhandenen Film aendern, aber mit falschem Token', async () => {
         // given
         const token = 'FALSCH';
         const headers = new Headers({
@@ -286,7 +286,7 @@ describe('PUT /filme/:id', () => {
             'Content-Type': 'application/json',
             'If-Match': '"0"',
         });
-        const body = JSON.stringify(geaendertesBuch);
+        const body = JSON.stringify(geaendertesFilm);
         const request = new Request(`${filmeUri}/${idVorhanden}`, {
             method: HttpMethod.PUT,
             headers,

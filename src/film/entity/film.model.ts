@@ -50,7 +50,7 @@ export const filmSchema = new Schema(
         produktion: {
             type: String,
             required: true,
-            enum: ['FOO_PRODUKTION', 'BAR_PRODUKTION'],
+            enum: ['CONSTANTIN_FILM', 'BIG_PRODUKTION'],
             // es gibt auch
             //  lowercase: true
             //  uppercase: true
