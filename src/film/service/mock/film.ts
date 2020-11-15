@@ -22,11 +22,11 @@ import type { FilmData } from '../../entity';
 
 export const film: FilmData = {
     _id: '00000000-0000-0000-0000-000000000001',
-    titel: 'Alpha',
+    titel: 'Avatar',
     rating: 4,
     art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.CONSTANTIN_FILM,
-    preis: 11.1,
+    preis: 19.9,
     rabatt: 0.011,
     lieferbar: true,
     datum: new Date('2018-02-01T00:00:00.000Z'),
@@ -35,11 +35,11 @@ export const film: FilmData = {
     schlagwoerter: ['JAVASCRIPT'],
     regisseure: [
         {
-            nachname: 'Alpha',
+            nachname: 'Avatar',
             vorname: 'Adriana',
         },
         {
-            nachname: 'Alpha',
+            nachname: 'Avatar',
             vorname: 'Alfred',
         },
     ],
@@ -52,7 +52,7 @@ export const filme: FilmData[] = [
     film,
     {
         _id: '00000000-0000-0000-0000-000000000002',
-        titel: 'Beta',
+        titel: 'Batman',
         rating: 2,
         art: FilmArt.DREIDIMENSIONAL,
         produktion: Produktion.CONSTANTIN_FILM,
@@ -65,7 +65,7 @@ export const filme: FilmData[] = [
         schlagwoerter: ['TYPESCRIPT'],
         regisseure: [
             {
-                nachname: 'Beta',
+                nachname: 'Batman',
                 vorname: 'Brunhilde',
             },
         ],

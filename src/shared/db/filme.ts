@@ -20,7 +20,7 @@
 export const filme = [
     {
         _id: '00000000-0000-0000-0000-000000000001',
-        titel: 'Alpha',
+        titel: 'Avatar',
         rating: 4,
         art: 'ZWEIDIMENSIONAL',
         produktion: 'CONSTANTIN_FILM',
@@ -34,11 +34,11 @@ export const filme = [
         schlagwoerter: ['JAVASCRIPT'],
         regisseure: [
             {
-                nachname: 'Alpha',
+                nachname: 'Avatar',
                 vorname: 'Adriana',
             },
             {
-                nachname: 'Alpha',
+                nachname: 'Avatar',
                 vorname: 'Alfred',
             },
         ],
@@ -48,7 +48,7 @@ export const filme = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000002',
-        titel: 'Beta',
+        titel: 'Batman',
         rating: 2,
         art: 'DREIDIMENSIONAL',
         produktion: 'BIG_PRODUKTION',
@@ -61,7 +61,7 @@ export const filme = [
         schlagwoerter: ['TYPESCRIPT'],
         regisseure: [
             {
-                nachname: 'Beta',
+                nachname: 'Batman',
                 vorname: 'Brunhilde',
             },
         ],
@@ -71,7 +71,7 @@ export const filme = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000003',
-        titel: 'Gamma',
+        titel: 'Ghostbusters',
         rating: 1,
         art: 'ZWEIDIMENSIONAL',
         produktion: 'CONSTANTIN_FILM',
@@ -84,7 +84,7 @@ export const filme = [
         schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
         regisseure: [
             {
-                nachname: 'Gamma',
+                nachname: 'Ghostbusters',
                 vorname: 'Claus',
             },
         ],
@@ -94,7 +94,7 @@ export const filme = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000004',
-        titel: 'Delta',
+        titel: 'Democracy',
         rating: 3,
         art: 'ZWEIDIMENSIONAL',
         produktion: 'BIG_PRODUKTION',
@@ -107,7 +107,7 @@ export const filme = [
         schlagwoerter: [],
         regisseure: [
             {
-                nachname: 'Delta',
+                nachname: 'Democracy',
                 vorname: 'Dieter',
             },
         ],
@@ -117,7 +117,7 @@ export const filme = [
     },
     {
         _id: '00000000-0000-0000-0000-000000000005',
-        titel: 'Epsilon',
+        titel: 'Everest',
         rating: 2,
         art: 'DREIDIMENSIONAL',
         produktion: 'CONSTANTIN_FILM',
@@ -130,7 +130,7 @@ export const filme = [
         schlagwoerter: ['TYPESCRIPT'],
         regisseure: [
             {
-                nachname: 'Epsilon',
+                nachname: 'Everest',
                 vorname: 'Elfriede',
             },
         ],

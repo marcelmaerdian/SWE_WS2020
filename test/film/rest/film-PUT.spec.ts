@@ -50,7 +50,7 @@ const geaendertesFilm: object = {
     lieferbar: true,
     datum: '2016-02-03',
     homepage: 'https://test.te',
-    regisseure: [{ nachname: 'Gamma', vorname: 'Claus' }],
+    regisseure: [{ nachname: 'Ghostbusters', vorname: 'Claus' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 const idVorhanden = '00000000-0000-0000-0000-000000000003';
@@ -64,13 +64,13 @@ const geaendertesFilmIdNichtVorhanden: object = {
     rabatt: 0.033,
     lieferbar: true,
     datum: '2016-02-03',
-    regisseure: [{ nachname: 'Gamma', vorname: 'Claus' }],
+    regisseure: [{ nachname: 'Ghostbusters', vorname: 'Claus' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 const idNichtVorhanden = '00000000-0000-0000-0000-000000000999';
 
 const geaendertesFilmInvalid: object = {
-    titel: 'Alpha',
+    titel: 'Avatar',
     rating: -1,
     art: 'UNSICHTBAR',
     produktion: 'ENDLESS_PRODUKTION',
@@ -94,7 +94,7 @@ const veraltesFilm: object = {
     lieferbar: true,
     datum: '2016-02-03',
     homepage: 'https://test.te',
-    regisseure: [{ nachname: 'Gamma', vorname: 'Claus' }],
+    regisseure: [{ nachname: 'Ghostbusters', vorname: 'Claus' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
 };
 

@@ -68,7 +68,7 @@ const neuesFilmInvalid: object = {
     schlagwoerter: [],
 };
 const neuesFilmTitelExistiert: Film = {
-    titel: 'Alpha',
+    titel: 'Avatar',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
     produktion: Produktion.CONSTANTIN_FILM,
