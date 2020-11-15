@@ -7,6 +7,6 @@
   "rabatt": 0,
   "lieferbar": true,
   "datum": "12345-123-123",
-  "prodnr": "falsche-prodnr",
+  "isbn": "falsche-isbn",
   "homepage": "anyHomepage"
 }

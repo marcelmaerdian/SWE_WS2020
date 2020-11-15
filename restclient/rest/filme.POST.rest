@@ -55,12 +55,12 @@ Authorization: Bearer {{login.response.body.$.token}}
 
 < .\json\film-neu.titel-exists.json
 
-### Neuen Film anlegen, aber die PRODNR-Nummer existiert bereits
+### Neuen Film anlegen, aber die ISBN-Nummer existiert bereits
 POST https://{{host}}/filme
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.$.token}}
 
-< .\json\film-neu.prodnr-exists.json
+< .\json\film-neu.isbn-exists.json
 
 ### Neuen Film ohne Login anlegen
 POST https://{{host}}/filme

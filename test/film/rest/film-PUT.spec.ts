@@ -40,7 +40,7 @@ const { expect } = chai;
 // T e s t d a t e n
 // -----------------------------------------------------------------------------
 const geaendertesFilm: object = {
-    // prodnr wird nicht geaendert
+    // isbn wird nicht geaendert
     titel: 'Geaendert',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
@@ -78,13 +78,13 @@ const geaendertesFilmInvalid: object = {
     rabatt: 0,
     lieferbar: true,
     datum: '12345-123-123',
-    prodnr: 'falsche-PRODNR',
+    isbn: 'falsche-ISBN',
     regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: [],
 };
 
 const veraltesFilm: object = {
-    // prodnr wird nicht geaendet
+    // isbn wird nicht geaendet
     titel: 'Veraltet',
     rating: 1,
     art: FilmArt.ZWEIDIMENSIONAL,
@@ -194,7 +194,7 @@ describe('PUT /filme/:id', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, produktion, datum, prodnr } = await response.json();
+        const { art, rating, produktion, datum, isbn } = await response.json();
         expect(art).to.be.equal(
             'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
         );
@@ -203,7 +203,7 @@ describe('PUT /filme/:id', () => {
             'Die Produktion eines Films muss CONSTANTIN_FILM oder BIG_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
-        expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
+        expect(isbn).to.endWith('eine gueltige ISBN-Nummer.');
     });
 
     test('Vorhandenen Film aendern, aber ohne Versionsnummer', async () => {

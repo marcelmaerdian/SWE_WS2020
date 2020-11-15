@@ -21,7 +21,7 @@ import {
     FilmInvalid,
     FilmNotExists,
     FilmServiceError,
-    ProdnrExists,
+    IsbnExists,
     TitelExists,
     VersionInvalid,
     VersionOutdated,
@@ -247,9 +247,9 @@ export class FilmService {
             return resultTitel;
         }
 
-        const resultProdnr = await this.checkProdnrExists(film);
-        if (resultProdnr !== undefined) {
-            return resultProdnr;
+        const resultIsbn = await this.checkIsbnExists(film);
+        if (resultIsbn !== undefined) {
+            return resultIsbn;
         }
 
         logger.debug('FilmService.validateCreate(): ok');
@@ -275,21 +275,21 @@ export class FilmService {
         return undefined;
     }
 
-    private async checkProdnrExists(film: Film) {
-        const { prodnr } = film;
+    private async checkIsbnExists(film: Film) {
+        const { isbn } = film;
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const tmpId = await FilmModel.findOne({ prodnr }, { _id: true }).lean<
+        const tmpId = await FilmModel.findOne({ isbn }, { _id: true }).lean<
             string
         >();
 
         if (tmpId !== null) {
             logger.debug(
-                `FilmService.checkProdnrExists(): film=${JSON5.stringify(tmpId)}`,
+                `FilmService.checkIsbnExists(): film=${JSON5.stringify(tmpId)}`,
             );
-            return new ProdnrExists(prodnr as string, tmpId);
+            return new IsbnExists(isbn as string, tmpId);
         }
 
-        logger.debug('FilmService.checkProdnrExists(): ok');
+        logger.debug('FilmService.checkIsbnExists(): ok');
         return undefined;
     }
 

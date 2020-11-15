@@ -9,7 +9,7 @@ autoren ->  regisseure
 autor   ->  regisseur
 druckausgabe -> zweidimensional
 kindle  ->  dreidimensional
-isbn    ->  prodnr
+isbn    ->  isbn
 titel   ->  titel
 preis   ->  preis
 ---------------------------------------------duy-08.11.2020-----------------------------------------

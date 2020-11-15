@@ -20,7 +20,7 @@ import type { Film } from './film';
 import JSON5 from 'json5';
 import validator from 'validator';
 
-const { isPRODNR, isISO8601, isURL } = validator;
+const { isISBN, isISO8601, isURL } = validator;
 
 export interface ValidationErrorMsg {
     id?: string;
@@ -29,14 +29,14 @@ export interface ValidationErrorMsg {
     rating?: string;
     produktion?: string;
     datum?: string;
-    prodnr?: string;
+    isbn?: string;
     homepage?: string;
 }
 
 /* eslint-disable max-lines-per-function, no-null/no-null */
 export const validateFilm = (film: Film) => {
     const err: ValidationErrorMsg = {};
-    const { titel, art, rating, produktion, datum, prodnr, homepage } = film;
+    const { titel, art, rating, produktion, datum, isbn, homepage } = film;
 
     if (titel === undefined || titel === null || titel === '') {
         err.titel = 'Ein Film muss einen Titel haben.';
@@ -52,7 +52,7 @@ export const validateFilm = (film: Film) => {
         (art as unknown) !== 'ZWEIDIMENSIONAL'
     ) {
         err.art =
-            'Die Art eine Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.';
+            'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.';
     }
 
     if (
@@ -78,12 +78,12 @@ export const validateFilm = (film: Film) => {
     }
 
     if (
-        prodnr !== undefined &&
-        prodnr !== null &&
+        isbn !== undefined &&
+        isbn !== null &&
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-        (typeof prodnr !== 'string' || !isPRODNR(prodnr))
+        (typeof isbn !== 'string' || !isISBN(isbn))
     ) {
-        err.prodnr = `'${prodnr}' ist keine gueltige PRODNR-Nummer.`;
+        err.isbn = `'${isbn}' ist keine gueltige ISBN-Nummer.`;
     }
 
     // Falls "preis" ein string ist: Pruefung z.B. 12.30

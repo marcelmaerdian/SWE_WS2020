@@ -33,13 +33,13 @@ export class TitelExists extends FilmServiceError {
     }
 }
 
-export class ProdnrExists extends FilmServiceError {
-    constructor(readonly prodnr: string, readonly id: string) {
+export class IsbnExists extends FilmServiceError {
+    constructor(readonly isbn: string, readonly id: string) {
         super();
     }
 }
 
-export type CreateError = FilmInvalid | TitelExists | ProdnrExists;
+export type CreateError = FilmInvalid | TitelExists | IsbnExists;
 
 export class VersionInvalid extends FilmServiceError {
     constructor(readonly version: string | undefined) {

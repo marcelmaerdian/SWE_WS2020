@@ -30,7 +30,7 @@ export const film: FilmData = {
     rabatt: 0.011,
     lieferbar: true,
     datum: new Date('2018-02-01T00:00:00.000Z'),
-    prodnr: '000-0-00000-000-1',
+    isbn: '000-0-00000-000-1',
     homepage: 'https://acme.at/',
     schlagwoerter: ['JAVASCRIPT'],
     regisseure: [
@@ -60,7 +60,7 @@ export const filme: FilmData[] = [
         rabatt: 0.022,
         lieferbar: true,
         datum: new Date('2018-02-02T00:00:00.000Z'),
-        prodnr: '000-0-00000-000-2',
+        isbn: '000-0-00000-000-2',
         homepage: 'https://acme.biz/',
         schlagwoerter: ['TYPESCRIPT'],
         regisseure: [
