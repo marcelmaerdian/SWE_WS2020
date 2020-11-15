@@ -67,7 +67,7 @@ const createIndex = async (collection: Collection) => {
     // Beachte: bei createIndexes() gelten die Optionen fuer alle Indexe
     let index = await collection.createIndex('titel', { unique: true });
     logger.warn(`Der Index ${index} wurde angelegt.`);
-    index = await collection.createIndex('isbn', { unique: true });
+    index = await collection.createIndex('prodnr', { unique: true });
     logger.warn(`Der Index ${index} wurde angelegt.`);
     index = await collection.createIndex('schlagwoerter', { sparse: true });
     logger.warn(`Der Index ${index} wurde angelegt.`);

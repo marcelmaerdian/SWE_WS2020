@@ -62,7 +62,7 @@ package film.entity {
     + rabatt?: number
     + lieferbar?: boolean
     + datum?: Date
-    + isbn: string
+    + prodnr: string
     + homepage?: string
     + schlagwoerter?: Array<string>
     + regisseure: any

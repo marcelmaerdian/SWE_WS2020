@@ -60,7 +60,9 @@ describe('DELETE /filme', () => {
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
-    afterAll(() => { server.close() });
+    afterAll(() => {
+        server.close();
+    });
 
     test('Vorhandenen Film loeschen', async () => {
         // given

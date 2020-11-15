@@ -62,7 +62,7 @@ export const typeDefs = gql`
         rabatt: Float
         lieferbar: Boolean
         datum: String
-        isbn: String
+        prodnr: String
         homepage: String
         schlagwoerter: [String]
     }
@@ -84,7 +84,7 @@ export const typeDefs = gql`
             rabatt: Float
             lieferbar: Boolean
             datum: String
-            isbn: String
+            prodnr: String
             homepage: String
             schlagwoerter: [String]
         ): Film
@@ -98,7 +98,7 @@ export const typeDefs = gql`
             rabatt: Float
             lieferbar: Boolean
             datum: String
-            isbn: String
+            prodnr: String
             homepage: String
             schlagwoerter: [String]
             version: Int

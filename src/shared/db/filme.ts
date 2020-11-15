@@ -29,7 +29,7 @@ export const filme = [
         lieferbar: true,
         // https://docs.mongodb.com/manual/reference/method/Date
         datum: new Date('2020-02-01'),
-        isbn: '978-3897225831',
+        prodnr: '978-3897225831',
         homepage: 'https://acme..at/',
         schlagwoerter: ['JAVASCRIPT'],
         regisseure: [
@@ -56,7 +56,7 @@ export const filme = [
         rabatt: 0.022,
         lieferbar: true,
         datum: new Date('2020-02-02'),
-        isbn: '978-3827315526',
+        prodnr: '978-3827315526',
         homepage: 'https://acme..biz/',
         schlagwoerter: ['TYPESCRIPT'],
         regisseure: [
@@ -79,7 +79,7 @@ export const filme = [
         rabatt: 0.033,
         lieferbar: true,
         datum: new Date('2020-02-03'),
-        isbn: '978-0201633610',
+        prodnr: '978-0201633610',
         homepage: 'https://acme.com/',
         schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
         regisseure: [
@@ -102,7 +102,7 @@ export const filme = [
         rabatt: 0.044,
         lieferbar: true,
         datum: new Date('2020-02-04'),
-        isbn: '978-0387534046',
+        prodnr: '978-0387534046',
         homepage: 'https://acme.de/',
         schlagwoerter: [],
         regisseure: [
@@ -125,7 +125,7 @@ export const filme = [
         rabatt: 0.055,
         lieferbar: true,
         datum: new Date('2020-02-05'),
-        isbn: '978-3824404810',
+        prodnr: '978-3824404810',
         homepage: 'https://acme.es/',
         schlagwoerter: ['TYPESCRIPT'],
         regisseure: [

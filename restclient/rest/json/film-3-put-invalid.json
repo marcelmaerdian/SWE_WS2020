@@ -8,7 +8,7 @@
   "rabatt": 99,
   "lieferbar": true,
   "datum": "12345-123-123",
-  "isbn": "falsche-isbn",
+  "prodnr": "falsche-prodnr",
   "homepage": "anyHomepage",
   "schlagwoerter": ["JAVASCRIPT"]
 }

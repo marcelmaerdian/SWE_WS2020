@@ -83,7 +83,9 @@ describe('GET /filme/:id', () => {
         filmeUri = `https://${serverConfig.host}:${address.port}${path}`;
     });
 
-    afterAll(() => { server.close() });
+    afterAll(() => {
+        server.close();
+    });
 
     each(idVorhanden).test('Film zu vorhandener ID %s', async (id) => {
         // given

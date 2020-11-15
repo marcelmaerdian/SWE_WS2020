@@ -49,7 +49,7 @@ const neuerFilm: Film = {
     rabatt: 0.099,
     lieferbar: true,
     datum: '2016-02-28',
-    isbn: '0-0070-0644-6',
+    prodnr: '0-0070-0644-6',
     homepage: 'https://test.de/',
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
     regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
@@ -63,7 +63,7 @@ const neuesFilmInvalid: object = {
     rabatt: 0,
     lieferbar: true,
     datum: '12345-123-123',
-    isbn: 'falsche-ISBN',
+    prodnr: 1024,
     regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: [],
 };
@@ -76,7 +76,7 @@ const neuesFilmTitelExistiert: Film = {
     rabatt: 0.099,
     lieferbar: true,
     datum: '2016-02-28',
-    isbn: '0-0070-9732-8',
+    prodnr: '0-0070-9732-8',
     homepage: 'https://test.de/',
     regisseure: [{ nachname: 'Test', vorname: 'Theo' }],
     schlagwoerter: ['JAVASCRIPT', 'TYPESCRIPT'],
@@ -104,7 +104,9 @@ describe('POST /filme', () => {
 
     // (done?: DoneFn) => Promise<void | undefined | unknown> | void | undefined
     // close(callback?: (err?: Error) => void): this
-    afterAll(() => { server.close() });
+    afterAll(() => {
+        server.close();
+    });
 
     test('Neuer Film', async () => {
         // given
@@ -164,7 +166,13 @@ describe('POST /filme', () => {
 
         // then
         expect(response.status).to.be.equal(HttpStatus.BAD_REQUEST);
-        const { art, rating, produktion, datum, isbn } = await response.json();
+        const {
+            art,
+            rating,
+            produktion,
+            datum,
+            prodnr,
+        } = await response.json();
 
         expect(art).to.be.equal(
             'Die Art eines Films muss DREIDIMENSIONAL oder ZWEIDIMENSIONAL sein.',
@@ -174,7 +182,7 @@ describe('POST /filme', () => {
             'Die Produktion eines Films muss CONSTANTIN_FILM oder BIG_PRODUKTION sein.',
         );
         expect(datum).to.contain('ist kein gueltiges Datum');
-        expect(isbn).to.endWith('eine gueltige ISBN-Nummer.');
+        expect(prodnr).to.endWith('eine gueltige PRODNR-Nummer.');
     });
 
     test('Neuer Film, aber der Titel existiert bereits', async () => {

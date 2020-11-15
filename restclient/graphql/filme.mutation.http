@@ -35,7 +35,7 @@ mutation {
     rabatt: 0.011
     lieferbar: true
     datum: null
-    isbn: "3-89722-583-2"
+    prodnr: "3-89722-583-2"
     homepage: "http://acme.com"
     schlagwoerter: ["JAVASCRIPT"]
   ) {
@@ -59,7 +59,7 @@ mutation {
     rabatt: 0.099,
     lieferbar: false,
     datum: "2018-01-31",
-    isbn: "3-8273-1552-2",
+    prodnr: "3-8273-1552-2",
     homepage: "https://acme.com",
     schlagwoerter: [
       "JAVASCRIPT",

@@ -66,7 +66,9 @@ describe('REST-Schnittstelle /login', () => {
         loginUri = `${baseUri}${PATHS.login}`;
     });
 
-    afterAll(() => { server.close() });
+    afterAll(() => {
+        server.close();
+    });
 
     test('Login mit korrektem Passwort', async () => {
         // given

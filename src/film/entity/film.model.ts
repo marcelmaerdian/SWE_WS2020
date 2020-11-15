@@ -59,7 +59,7 @@ export const filmSchema = new Schema(
         rabatt: Number,
         lieferbar: Boolean,
         datum: Date,
-        isbn: { type: String, required: true, unique: true, immutable: true },
+        prodnr: { type: String, required: true, unique: true, immutable: true },
         homepage: String,
         schlagwoerter: { type: [String], sparse: true },
         // "anything goes"

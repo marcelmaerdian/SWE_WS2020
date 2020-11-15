@@ -23,7 +23,7 @@ import {
     FilmNotExists,
     FilmService,
     FilmServiceError,
-    IsbnExists,
+    ProdnrExists,
     TitelExists,
     VersionInvalid,
     VersionOutdated,
@@ -251,13 +251,13 @@ export class FilmRequestHandler {
             return;
         }
 
-        if (err instanceof IsbnExists) {
-            this.handleIsbnExists(err.isbn, err.id, res);
+        if (err instanceof ProdnrExists) {
+            this.handleProdnrExists(err.prodnr, err.id, res);
         }
     }
 
-    private handleIsbnExists(isbn: string, id: string, res: Response) {
-        const msg = `Die ISBN-Nummer "${isbn}" existiert bereits bei ${id}.`;
+    private handleProdnrExists(prodnr: string, id: string, res: Response) {
+        const msg = `Die PRODNR-Nummer "${prodnr}" existiert bereits bei ${id}.`;
         logger.debug(`FilmRequestHandler.handleCreateError(): msg=${msg}`);
         res.status(HttpStatus.BAD_REQUEST)
             .set('Content-Type', 'text/plain')

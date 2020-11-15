@@ -60,7 +60,9 @@ describe('GET /filme', () => {
         filmeUri = `https://${serverConfig.host}:${address.port}${path}`;
     });
 
-    afterAll(() => { server.close() });
+    afterAll(() => {
+        server.close();
+    });
 
     test('Alle Filme', async () => {
         // given

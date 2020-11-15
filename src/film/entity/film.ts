@@ -37,7 +37,7 @@ export interface Film {
     rabatt: number | undefined;
     lieferbar: boolean;
     datum: string | Date | undefined;
-    isbn: string | undefined | null;
+    prodnr: string | undefined | null;
     homepage: string | undefined | null;
     schlagwoerter?: string[];
     regisseure: unknown;
