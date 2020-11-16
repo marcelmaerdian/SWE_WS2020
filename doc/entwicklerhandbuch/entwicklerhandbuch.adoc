@@ -14,7 +14,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 = Entwicklerhandbuch
-Jürgen Zimmermann <Juergen.Zimmermann@HS-Karlsruhe.de>
+Gruppe 11
 :doctype: book
 :toc: left
 :sectanchors:
@@ -30,7 +30,7 @@ Jürgen Zimmermann <Juergen.Zimmermann@HS-Karlsruhe.de>
 // http://de.plantuml.com/component.html
 // https://github.com/odrotbohm/asciidoctor-plantuml
 
-IMPORTANT: Copyright (C) 2020 - present Jürgen Zimmermann, Hochschule Karlsruhe. +
+IMPORTANT: Copyright (C) 2020 - present Gruppe 11, Hildenbrand, Märdian, Nguyen, Schröder, Hochschule Karlsruhe. +
            Free use of this software is granted under the terms of the
            GNU General Public License (GPL) v3. +
            For the full text of the license, see the http://www.gnu.org/licenses/gpl-3.0.html[license] file.
@@ -39,7 +39,7 @@ IMPORTANT: Copyright (C) 2020 - present Jürgen Zimmermann, Hochschule Karlsruhe
 
 === Der Applikationsserver im Überblick
 
-bla bla
+In den folgenden Schaubilder erhalten Sie einen Überblick über den Applikationsserver.
 
 .Use Cases
 [plantuml,use-cases,svg]
@@ -47,7 +47,7 @@ bla bla
 include::use-cases.puml[]
 ----
 
-bla bla
+Die Use Cases dokumentieren die Funktionalität unseres Systems.
 
 .Komponentendiagramm
 [plantuml,komponenten,svg]
@@ -57,7 +57,7 @@ include::komponenten.puml[]
 
 === Die REST-Schnittstelle
 
-bla bla
+Im folgenden Schaubild erhalten Sie einen näheren Überblick über den Aufbau der REST-Schnittstelle.
 
 .Handler für die REST-Schnittstelle
 [plantuml,FilmHandler,svg]
@@ -67,7 +67,7 @@ include::FilmHandler.puml[]
 
 === Der Anwendungskern
 
-bla bla
+Der Anwendungskern im Schaubild. 
 
 .Anwendungskern mit Mongoose
 [plantuml,FilmService,svg]
@@ -77,7 +77,7 @@ include::FilmService.puml[]
 
 === Interface für Entities und das Mongoose-Model
 
-bla bla
+Im folgenden Schaubild sehen Sie das Interface für die Entities und das Mongoose-Model.
 
 .Entity, Model und Schema
 [plantuml,Film,svg]
