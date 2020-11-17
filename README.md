@@ -431,7 +431,7 @@ in den Eingabefeldern eingeben bzw. auswählen:
 ### Webbrowser statt Compass
 
 Wenn man bei https://cloud.mongodb.com eingeloggt ist und den Menüpunkt
-_Clusters_ ausgewählt hat, kann man auch auf den Button _Collections_ klicken
+_Clusters_ ausgewählt hat, kann man auch auf den Button _Collections_ klickePaula Dalla Corten
 und so die eigene(n) Collection(s) und Indexe inspizieren.
 
 ## Heroku
@@ -531,6 +531,9 @@ Powershell-Terminal die Interaktion mit Heroku verfolgen.
 
 Das wiederholt man dann noch für die Umgebungsvariable mit den passenden
 Werten für Benutzername und Passwort aus der Atlas-Konfiguration:
+
+  jakob=cluster0-la4d7.mongodb.net
+
 
 - DB_USER=?????
 - DB_PASS=?????
