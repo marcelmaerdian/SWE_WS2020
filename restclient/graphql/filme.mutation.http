@@ -43,7 +43,7 @@ mutation {
   }
 }
 
-### Vorhandenes Film aktualisieren
+### Vorhandenen Film aktualisieren
 POST {{url}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL

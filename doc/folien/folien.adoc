@@ -19,94 +19,54 @@
 
 // https://asciidoctor.org/docs/asciidoctor-revealjs
 
-= Beispiel mit MEAN, REST, GraphQL, Mongoose, JWT und Jest
+= Der Aufbau unseres Projektes "FILM" in der Übersicht
 
 Gruppe 11 - Hildenbrand, Märdian, Nguyen, Schröder
 
 == Gliederung
 
-* Node
-* Express und REST
-* GraphQL
-* Mongoose
-* JWT
-* Jest usw.
+* Der allgemeine Projektaufbau
+** Die Entwicklungsumgebung
+** Die eingesetzten Werkzeuge
+* Durchführung der Projektplanung
+* Das Starten der verschiedenen Server
+** Mailserver, Applikationsserver, Jenkins, SonarQube
 
-== Node
-
-* Infrastruktur
-* Entwicklungsumgebung
-* Programmierung
-* Dokumentation
-
-=== Infrastruktur
-
-* package.json
-* node_modules
-* npm
-* nodemon
-* ts-node
-* Heroku und Buildpack
-* Jenkins und Docker
-
-=== Entwicklungsumgebung
+== Der allgemeine Projektaufbau
+=== Die Entwicklungsumgebung
 
 * VS Code
-* ESLint und SonarQube
-* Prettier
-* RESTclient, auch für GraphQL
+* RESTful Web Service
+* GraphQL
 
-=== Programmierung
+=== Die eingesetzten Werkzeuge
 
-* Server einschl. Listener
-* ES 2015+
-* TypeScript
+* ESLint, Prettier und SonarQube
+* Mongoose, Express
+* MongoDB, MongoDBCompass bzw. MongoDB Atlas
+* Jenkins
+* Heroku
+* GitHub
 
-=== Dokumentation
+== Durchführung der Projektplanung
 
-* AsciiDoctor mit PlantUML
-* reveal.js
-* _TODO: Jekyll_
+* Die Zeiterfassung der Teammitglieder erfolgte über MS Excel
+* Die Projektplanung erfolgte mit Project Professional 
 
-== Express und REST
+== Das Starten der verschiedenen Server
 
-* Router
-* Handler
+=== Mailserver
 
-== GraphQL und Apollo Server
+* npm run mailserver
 
-* typeDefs und gql
-* resolver
+=== Applikationsserver
 
-== Mongoose
+* npm run docker
 
-* Pattern _Active Record_
-* Document
-* JSON
-* GridFS
+=== Jenkins
 
-== JWT
+* npm run jenkins
 
-* Private und Public Key
-* Header
-* Payload
-* Signature
+=== SonarQube
 
-=== Header
-
-* alg
-* typ
-
-=== Payload
-
-* iat
-* exp
-* iss
-
-== Jest usw.
-
-* Jest
-* ts-jest
-* Chai
-* fetch
-* Istanbul
+* npm run sonarqube

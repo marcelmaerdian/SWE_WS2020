@@ -23,6 +23,9 @@ FROM node:14.11.0-buster
 # Verzeichnis erstellen
 WORKDIR /usr/src/app
 
+# Kopieren von Umgebungsvariablen
+COPY .env .
+
 # package.json und package-lock.json in das obige Arbeitsverzeichnis kopieren
 COPY package.json .
 COPY package-lock.json .

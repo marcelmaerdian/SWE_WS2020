@@ -22,7 +22,7 @@ import { resolve } from 'path';
 const argv = minimist(process.argv.slice(0));
 const values = argv._;
 
-const image = 'juergenzimmermann/film:1.0.0';
+const image = 'matthiashildenbrand/filme:1.0.0';
 const containername = 'film';
 
 const startContainer = () => {
@@ -31,21 +31,13 @@ const startContainer = () => {
         // prettier-ignore
         'docker run --publish 3000:3000 ' +
             `--mount type=bind,source=${logfile},destination=/usr/src/app/server.log ` +
-            '--env NODE_ENV=development ' +
-            '--env DB_HOST=host.docker.internal ' +
-            '--env DB_TLS=false ' +
-            '--env DB_POPULATE=true ' +
-            '--env APOLLO_PLAYGROUND=true ' +
-            '--env MAIL_HOST=host.docker.internal ' +
-            '--env MAIL_LOG=false ' +
-            '--env USER_PASSWORD_ENCODED=$2b$10$YTg4.iW.FPRqHExVLRf05Ob/z/BQqjUxJgncct2TgxGBjl4cCUNGS ' +
             '--env TZ=Europe/Berlin ' +
-            `--name ${containername} --hostname film --rm ` +
+            `--name ${containername} --hostname 127.0.0.1 --rm ` +
             image,
     );
 };
 
-const build = () => {
+const buildImage = () => {
     // Dockerfile im aktuellen Verzeichnis
     // Download der diversen Layer fuer node:x.y.z-buster
     exec(`docker build --tag ${image} .`);
@@ -57,10 +49,11 @@ switch (values[2]) {
         startContainer();
         break;
 
-    case 'build':
-        build();
+    case 'image':
+    case 'buildImage':
+        buildImage();
         break;
 
     default:
-        console.log('npm run docker [start|build]');
+        console.log('npm run docker [start|buildImage]');
 }
